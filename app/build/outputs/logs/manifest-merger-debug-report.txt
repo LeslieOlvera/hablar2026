@@ -1,0 +1,368 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:2:1-42:12
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:2:1-42:12
+MERGED from [androidx.navigationevent:navigationevent-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9da53fc45e652082fa280d67795345d8\workspace\transformed\navigationevent\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.navigationevent:navigationevent-compose-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a63f6ef9233c540f6a2653ade9a1f88d\workspace\transformed\navigationevent-compose\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material3:material3-android:1.3.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8773379ede19dd100b9e8a43e2b45c3a\workspace\transformed\material3-release\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\865d7fdfc08a2b93b1b4887908157bff\workspace\transformed\material-ripple-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3485328ea3f777af8d57c05474379f2f\workspace\transformed\foundation-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\077dea60c0365a3727a66df584f7eb0f\workspace\transformed\foundation-layout\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-core-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\98684b37a6d4751b06fe89253f19000d\workspace\transformed\animation-core\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.animation:animation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\186fa36d2dfd70b745b1c4d498ff5897\workspace\transformed\animation\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\58b2f641859bdb753638efddd008e235\workspace\transformed\ui-tooling-data\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8d35edb7db376c54ac667f13df1c22c1\workspace\transformed\ui-geometry\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\6620bc5a49e8c9acf91c27917de6730a\workspace\transformed\ui-tooling-preview\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.ui:ui-util-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\f6bccf7db15dc8786c4eba02dbb7a8dd\workspace\transformed\ui-util\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\260ef146e758ef24550c412976722749\workspace\transformed\ui-unit\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-text-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\c2831e3fc4aeac4e968209712f7a4cb5\workspace\transformed\ui-text\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\65994517e185fdecb298b768dec640ec\workspace\transformed\ui-graphics-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.compose.material:material-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\09e2be4e52bc3b723b2c96b9468842c3\workspace\transformed\material-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\adaa29bbcb44626dca310f0a75a0e9b3\workspace\transformed\material-icons-core-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a9381edb18f549d835b07fcca18d3ac1\workspace\transformed\ui-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:17:1-29:12
+MERGED from [androidx.activity:activity-ktx:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ec6865f409ce7ef6fcc3a2a8e99437a6\workspace\transformed\activity-ktx-1.12.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.activity:activity:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ffc7e20a9b50511419917817cab6eab6\workspace\transformed\activity-1.12.3\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity-compose:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5f9f7799b604c2b6614e898a81c9945a\workspace\transformed\activity-compose-1.12.3\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3c22e5e9d04328bf46b64aabc9b436e8\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\b78a51ee063b2b456f4bd2b9ccf62f87\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5c82e80ace794c13af9e857997968a70\workspace\transformed\lifecycle-viewmodel-ktx-2.10.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2228f4e5be5f2099247d4ac78b89e3a4\workspace\transformed\lifecycle-livedata-core-2.10.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\752a7282135fdbb1ac51a516df0af3cd\workspace\transformed\lifecycle-viewmodel\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7c99a69c39f42690c41c09659e56a080\workspace\transformed\runtime-annotation\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate-ktx:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5774379795c589c46a5400efc71e3eb3\workspace\transformed\savedstate-ktx-1.4.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.savedstate:savedstate-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\dde19c8ee918e0b21e4941f32db4b7d8\workspace\transformed\savedstate\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate-compose-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\53754fcdc150fabdf344e514bab0d014\workspace\transformed\savedstate-compose\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3d412a05ec279c19241944a58d49d1ef\workspace\transformed\runtime\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\417988370debda6829d2258c52d8cc21\workspace\transformed\runtime-saveable\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7bf338024e559adcb9c8fc0aaba3c625\workspace\transformed\lifecycle-runtime-compose\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7029b086b3b84d9b0d0ce82f5e1254a6\workspace\transformed\lifecycle-runtime\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\aeda34497420aeefe78b7b94dcb942eb\workspace\transformed\lifecycle-runtime-ktx\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\962aa47bc4242d978c023340f222b0f4\workspace\transformed\lifecycle-viewmodel-savedstate\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a1458f0c4effb3d0f0b6c1c0f31bba4a\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
+MERGED from [androidx.core:core-ktx:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a0ac24aa10529c704f13719532534205\workspace\transformed\core-ktx-1.17.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3a5c9a8161b42e0507cd42310cdab9b4\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.core:core-viewtree:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\01406e4c064223433aa96f529aa55c2e\workspace\transformed\core-viewtree-1.0.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ca4ad6b2ba5f7da95ecc472ed19da7f9\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\64ec96366b90b7267628b07ba2ea0446\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9412e1ffb92bfb9e111fe6ef58777a27\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2214651e9c506c1053b2ef572b3e5c1d\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
+	package
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:4:5-67
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:4:22-64
+application
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:5:5-40:19
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:5:5-40:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:22:5-27:19
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:22:5-27:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9412e1ffb92bfb9e111fe6ef58777a27\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9412e1ffb92bfb9e111fe6ef58777a27\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:12:9-35
+	android:label
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:10:9-41
+	android:fullBackupContent
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:8:9-54
+	android:roundIcon
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:11:9-54
+	android:icon
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:9:9-43
+	android:allowBackup
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:13:9-41
+	android:dataExtractionRules
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:7:9-65
+activity#com.example.tsh.MainActivity
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:15:9-37:20
+	android:label
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:18:13-32
+	android:exported
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:17:13-36
+	android:theme
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:19:13-45
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:16:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:21:13-24:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:22:17-69
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:22:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:23:17-77
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:23:27-74
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:hablartsh.com+data:pathPrefix:/reset+data:scheme:https
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:26:13-35:29
+	android:autoVerify
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:26:28-53
+action#android.intent.action.VIEW
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:27:17-69
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:27:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:28:17-76
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:28:27-73
+category#android.intent.category.BROWSABLE
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:29:17-78
+	android:name
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:29:27-75
+data
+ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:31:17-34:51
+	android:host
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:33:21-49
+	android:scheme
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:32:21-43
+	android:pathPrefix
+		ADDED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml:34:21-48
+uses-sdk
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+MERGED from [androidx.navigationevent:navigationevent-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9da53fc45e652082fa280d67795345d8\workspace\transformed\navigationevent\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigationevent:navigationevent-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9da53fc45e652082fa280d67795345d8\workspace\transformed\navigationevent\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigationevent:navigationevent-compose-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a63f6ef9233c540f6a2653ade9a1f88d\workspace\transformed\navigationevent-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.navigationevent:navigationevent-compose-android:1.0.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a63f6ef9233c540f6a2653ade9a1f88d\workspace\transformed\navigationevent-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8773379ede19dd100b9e8a43e2b45c3a\workspace\transformed\material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material3:material3-android:1.3.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8773379ede19dd100b9e8a43e2b45c3a\workspace\transformed\material3-release\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\865d7fdfc08a2b93b1b4887908157bff\workspace\transformed\material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-ripple-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\865d7fdfc08a2b93b1b4887908157bff\workspace\transformed\material-ripple-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3485328ea3f777af8d57c05474379f2f\workspace\transformed\foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3485328ea3f777af8d57c05474379f2f\workspace\transformed\foundation-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\077dea60c0365a3727a66df584f7eb0f\workspace\transformed\foundation-layout\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.foundation:foundation-layout-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\077dea60c0365a3727a66df584f7eb0f\workspace\transformed\foundation-layout\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\98684b37a6d4751b06fe89253f19000d\workspace\transformed\animation-core\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-core-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\98684b37a6d4751b06fe89253f19000d\workspace\transformed\animation-core\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\186fa36d2dfd70b745b1c4d498ff5897\workspace\transformed\animation\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.animation:animation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\186fa36d2dfd70b745b1c4d498ff5897\workspace\transformed\animation\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\58b2f641859bdb753638efddd008e235\workspace\transformed\ui-tooling-data\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-data-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\58b2f641859bdb753638efddd008e235\workspace\transformed\ui-tooling-data\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8d35edb7db376c54ac667f13df1c22c1\workspace\transformed\ui-geometry\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-geometry-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8d35edb7db376c54ac667f13df1c22c1\workspace\transformed\ui-geometry\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\6620bc5a49e8c9acf91c27917de6730a\workspace\transformed\ui-tooling-preview\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-preview-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\6620bc5a49e8c9acf91c27917de6730a\workspace\transformed\ui-tooling-preview\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\f6bccf7db15dc8786c4eba02dbb7a8dd\workspace\transformed\ui-util\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-util-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\f6bccf7db15dc8786c4eba02dbb7a8dd\workspace\transformed\ui-util\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\260ef146e758ef24550c412976722749\workspace\transformed\ui-unit\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-unit-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\260ef146e758ef24550c412976722749\workspace\transformed\ui-unit\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\c2831e3fc4aeac4e968209712f7a4cb5\workspace\transformed\ui-text\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-text-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\c2831e3fc4aeac4e968209712f7a4cb5\workspace\transformed\ui-text\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\65994517e185fdecb298b768dec640ec\workspace\transformed\ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-graphics-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\65994517e185fdecb298b768dec640ec\workspace\transformed\ui-graphics-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.material:material-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\09e2be4e52bc3b723b2c96b9468842c3\workspace\transformed\material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\09e2be4e52bc3b723b2c96b9468842c3\workspace\transformed\material-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\adaa29bbcb44626dca310f0a75a0e9b3\workspace\transformed\material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.material:material-icons-core-android:1.7.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\adaa29bbcb44626dca310f0a75a0e9b3\workspace\transformed\material-icons-core-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a9381edb18f549d835b07fcca18d3ac1\workspace\transformed\ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a9381edb18f549d835b07fcca18d3ac1\workspace\transformed\ui-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-ktx:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ec6865f409ce7ef6fcc3a2a8e99437a6\workspace\transformed\activity-ktx-1.12.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-ktx:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ec6865f409ce7ef6fcc3a2a8e99437a6\workspace\transformed\activity-ktx-1.12.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ffc7e20a9b50511419917817cab6eab6\workspace\transformed\activity-1.12.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ffc7e20a9b50511419917817cab6eab6\workspace\transformed\activity-1.12.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity-compose:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5f9f7799b604c2b6614e898a81c9945a\workspace\transformed\activity-compose-1.12.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.activity:activity-compose:1.12.3] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5f9f7799b604c2b6614e898a81c9945a\workspace\transformed\activity-compose-1.12.3\AndroidManifest.xml:5:5-44
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3c22e5e9d04328bf46b64aabc9b436e8\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3c22e5e9d04328bf46b64aabc9b436e8\workspace\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\b78a51ee063b2b456f4bd2b9ccf62f87\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.graphics:graphics-path:1.0.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\b78a51ee063b2b456f4bd2b9ccf62f87\workspace\transformed\graphics-path-1.0.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5c82e80ace794c13af9e857997968a70\workspace\transformed\lifecycle-viewmodel-ktx-2.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5c82e80ace794c13af9e857997968a70\workspace\transformed\lifecycle-viewmodel-ktx-2.10.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2228f4e5be5f2099247d4ac78b89e3a4\workspace\transformed\lifecycle-livedata-core-2.10.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2228f4e5be5f2099247d4ac78b89e3a4\workspace\transformed\lifecycle-livedata-core-2.10.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\752a7282135fdbb1ac51a516df0af3cd\workspace\transformed\lifecycle-viewmodel\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\752a7282135fdbb1ac51a516df0af3cd\workspace\transformed\lifecycle-viewmodel\AndroidManifest.xml:20:5-44
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7c99a69c39f42690c41c09659e56a080\workspace\transformed\runtime-annotation\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-annotation-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7c99a69c39f42690c41c09659e56a080\workspace\transformed\runtime-annotation\AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5774379795c589c46a5400efc71e3eb3\workspace\transformed\savedstate-ktx-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-ktx:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\5774379795c589c46a5400efc71e3eb3\workspace\transformed\savedstate-ktx-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\dde19c8ee918e0b21e4941f32db4b7d8\workspace\transformed\savedstate\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\dde19c8ee918e0b21e4941f32db4b7d8\workspace\transformed\savedstate\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate-compose-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\53754fcdc150fabdf344e514bab0d014\workspace\transformed\savedstate-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.savedstate:savedstate-compose-android:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\53754fcdc150fabdf344e514bab0d014\workspace\transformed\savedstate-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3d412a05ec279c19241944a58d49d1ef\workspace\transformed\runtime\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3d412a05ec279c19241944a58d49d1ef\workspace\transformed\runtime\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\417988370debda6829d2258c52d8cc21\workspace\transformed\runtime-saveable\AndroidManifest.xml:5:5-44
+MERGED from [androidx.compose.runtime:runtime-saveable-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\417988370debda6829d2258c52d8cc21\workspace\transformed\runtime-saveable\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7bf338024e559adcb9c8fc0aaba3c625\workspace\transformed\lifecycle-runtime-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-compose-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7bf338024e559adcb9c8fc0aaba3c625\workspace\transformed\lifecycle-runtime-compose\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7029b086b3b84d9b0d0ce82f5e1254a6\workspace\transformed\lifecycle-runtime\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\7029b086b3b84d9b0d0ce82f5e1254a6\workspace\transformed\lifecycle-runtime\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\aeda34497420aeefe78b7b94dcb942eb\workspace\transformed\lifecycle-runtime-ktx\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime-ktx-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\aeda34497420aeefe78b7b94dcb942eb\workspace\transformed\lifecycle-runtime-ktx\AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\962aa47bc4242d978c023340f222b0f4\workspace\transformed\lifecycle-viewmodel-savedstate\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\962aa47bc4242d978c023340f222b0f4\workspace\transformed\lifecycle-viewmodel-savedstate\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a1458f0c4effb3d0f0b6c1c0f31bba4a\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a1458f0c4effb3d0f0b6c1c0f31bba4a\workspace\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
+MERGED from [androidx.core:core-ktx:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a0ac24aa10529c704f13719532534205\workspace\transformed\core-ktx-1.17.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\a0ac24aa10529c704f13719532534205\workspace\transformed\core-ktx-1.17.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3a5c9a8161b42e0507cd42310cdab9b4\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\3a5c9a8161b42e0507cd42310cdab9b4\workspace\transformed\annotation-experimental-1.4.1\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\01406e4c064223433aa96f529aa55c2e\workspace\transformed\core-viewtree-1.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-viewtree:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\01406e4c064223433aa96f529aa55c2e\workspace\transformed\core-viewtree-1.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ca4ad6b2ba5f7da95ecc472ed19da7f9\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ca4ad6b2ba5f7da95ecc472ed19da7f9\workspace\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\64ec96366b90b7267628b07ba2ea0446\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\64ec96366b90b7267628b07ba2ea0446\workspace\transformed\tracing-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9412e1ffb92bfb9e111fe6ef58777a27\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\9412e1ffb92bfb9e111fe6ef58777a27\workspace\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2214651e9c506c1053b2ef572b3e5c1d\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\2214651e9c506c1053b2ef572b3e5c1d\workspace\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
+	android:targetSdkVersion
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Cotero\AndroidStudioProjects\TSH\app\src\main\AndroidManifest.xml
+activity#androidx.compose.ui.tooling.PreviewActivity
+ADDED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:23:9-25:39
+	android:exported
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:25:13-36
+	android:name
+		ADDED from [androidx.compose.ui:ui-tooling-android:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\1c1fd434bf1c80f6b308d66caa57214d\workspace\transformed\ui-tooling\AndroidManifest.xml:24:13-71
+activity#androidx.activity.ComponentActivity
+ADDED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:23:9-26:79
+	android:exported
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:25:13-36
+	android:theme
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:26:13-76
+	android:name
+		ADDED from [androidx.compose.ui:ui-test-manifest:1.9.2] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\af5e920f8e222a1ecc23a5138185d966\workspace\transformed\ui-test-manifest-1.9.2\AndroidManifest.xml:24:13-63
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8a7ac5ee0134f1d6232046989e498eee\workspace\transformed\startup-runtime-1.1.1\AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\ce0bf8f5322ca5d11ba01b1a6c88616d\workspace\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+permission#com.example.tsh.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+uses-permission#com.example.tsh.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.17.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8658e190c7fd5cc860ba9bae46fcc1df\workspace\transformed\core-1.17.0\AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.10.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\8b0617b27684cf6aa5967dd3ede70d2a\workspace\transformed\lifecycle-process-2.10.0\AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\Cotero\.gradle\caches\9.1.0\transforms\d2467caef07b45d0a1aa69caa9f45573\workspace\transformed\profileinstaller-1.4.0\AndroidManifest.xml:50:25-92

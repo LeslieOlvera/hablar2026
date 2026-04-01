@@ -1,64 +1,66 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { pool } = require("../db");
+const { JWT_SECRET } = require("../middlewares/auth");
 
-// Función para registrar un Terapeuta
+function signToken(payload) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+}
+
 async function signupTerapeuta(req, res) {
   try {
-    // 1. Extraer datos del cuerpo de la petición
-    const { idCedula, nombreT, correoT, contrasenaT } = req.body;
+    const { nombreT, correoT, contrasenaT } = req.body;
 
-    // 2. Validación de campos vacíos
-    if (!idCedula || !nombreT || !correoT || !contrasenaT) {
-      return res.status(400).json({ 
-        message: "Faltan campos obligatorios: idCedula, nombreT, correoT, contrasenaT" 
-      });
+    if (!nombreT || !correoT || !contrasenaT) {
+      return res.status(400).json({ message: "Faltan campos: nombreT, correoT, contrasenaT" });
     }
 
-    // 3. Validación de tipo de dato: La cédula debe ser numérica
-    if (isNaN(idCedula)) {
-      return res.status(400).json({ message: "La cédula debe ser un valor numérico" });
-    }
-
-    // 4. Encriptar la contraseña (Costo de 10 es el estándar seguro)
     const hash = await bcrypt.hash(contrasenaT, 10);
 
-    // 5. Preparar el SQL (Asegúrate de que la tabla se llame 'Terapeuta')
     const sql = `
-      INSERT INTO Terapeuta (idCedula, nombreT, correoT, contrasenaT) 
-      VALUES (?, ?, ?, ?)
+      INSERT INTO Terapeuta (nombreT, correoT, contrasenaT)
+      VALUES (?, ?, ?)
     `;
 
-    // 6. Ejecución en la base de datos
-    // Usamos parseInt para asegurar que llegue como número a MySQL
-    await pool.execute(sql, [parseInt(idCedula), nombreT, correoT, hash]);
+    const [result] = await pool.execute(sql, [nombreT, correoT, hash]);
 
-    // Respuesta de éxito
-    return res.status(201).json({ 
-      message: "Terapeuta registrado con éxito", 
-      idCedula: idCedula 
-    });
-
+    return res.status(201).json({ message: "Terapeuta registrado", idCedula: result.insertId });
   } catch (err) {
-    // --- ESTO SE VERÁ EN TU TERMINAL DE NODE.JS ---
-    console.error("\n[!] ERROR EN REGISTRO TERAPEUTA:");
-    console.error("Código de error MySQL:", err.code);
-    console.error("Mensaje detallado:", err.message);
-    console.error("-----------------------------------\n");
-
-    // Manejo de errores específicos para el cliente (Android)
-    if (err.code === "ER_DUP_ENTRY") {
-      return res.status(409).json({ 
-        message: "El correo o la cédula ya están registrados en el sistema" 
-      });
-    }
-
-    // Error genérico 500 con el código de MySQL para depurar
-    return res.status(500).json({ 
-      error: err.code, 
-      message: "Error interno del servidor. Revisa la terminal." 
-    });
+    if (err.code === "ER_DUP_ENTRY") return res.status(409).json({ message: "El correoT ya existe" });
+    return res.status(500).json({ error: err.code, message: err.message });
   }
 }
 
-module.exports = { signupTerapeuta };
+async function loginTerapeuta(req, res) {
+  try {
+    const { correoT, contrasenaT } = req.body;
+
+    if (!correoT || !contrasenaT) {
+      return res.status(400).json({ message: "Faltan campos: correoT, contrasenaT" });
+    }
+
+    const [rows] = await pool.execute(
+      "SELECT idCedula, nombreT, correoT, contrasenaT FROM Terapeuta WHERE correoT = ? LIMIT 1",
+      [correoT]
+    );
+
+    if (rows.length === 0) return res.status(401).json({ message: "Credenciales invalidas" });
+
+    const terapeuta = rows[0];
+    const ok = await bcrypt.compare(contrasenaT, terapeuta.contrasenaT);
+    if (!ok) return res.status(401).json({ message: "Credenciales invalidas" });
+
+    const token = signToken({ role: "terapeuta", id: terapeuta.idCedula, correo: terapeuta.correoT });
+
+    return res.json({
+      message: "Login OK",
+      role: "terapeuta",
+      token,
+      terapeuta: { idCedula: terapeuta.idCedula, nombreT: terapeuta.nombreT, correoT: terapeuta.correoT },
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.code, message: err.message });
+  }
+}
+
+module.exports = { signupTerapeuta, loginTerapeuta };

@@ -5,12 +5,7 @@ const terapeutaAuthRoutes = require("./routes/auth.terapeuta.routes");
 const pacienteAuthRoutes = require("./routes/auth.paciente.routes");
 const pacientesRoutes = require("./routes/pacientes.routes");
 
-const cors = require("cors");
-
-const app = express(); // Primero se define la app
-
-// Ahora se aplican los middlewares
-app.use(cors()); // Esto permite que el celular se conecte al servidor
+const app = express();
 app.use(express.json());
 
 app.use("/", indexRoutes);

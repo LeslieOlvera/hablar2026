@@ -5,4 +5,3 @@ router.post("/signup", signupPaciente);
 router.post("/login", loginPaciente);
 
 module.exports = router;
-

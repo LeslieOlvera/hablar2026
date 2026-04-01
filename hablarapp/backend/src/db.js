@@ -3,7 +3,7 @@ const mysql = require("mysql2/promise");
 const DB_HOST = "127.0.0.1";
 const DB_PORT = 3306;
 const DB_USER = "root";
-const DB_PASS = "maria123?";
+const DB_PASS = "maria123";
 const DB_NAME = "app_tshusuarios";
 
 const pool = mysql.createPool({

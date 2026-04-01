@@ -1,66 +1,45 @@
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const { pool } = require("../db");
-const { JWT_SECRET } = require("../middlewares/auth");
-
-function signToken(payload) {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
-}
 
 async function signupTerapeuta(req, res) {
-  try {
-    const { nombreT, correoT, contrasenaT } = req.body;
+  // 1. Mensaje de vida inmediato
+  console.log(">>> LLEGÓ UNA PETICIÓN DE REGISTRO TERAPEUTA");
+  console.log("Body recibido:", req.body);
 
-    if (!nombreT || !correoT || !contrasenaT) {
-      return res.status(400).json({ message: "Faltan campos: nombreT, correoT, contrasenaT" });
+  try {
+    const { idCedula, nombreT, correoT, contrasenaT } = req.body;
+
+    // Validación ultra simple
+    if (!idCedula || !nombreT || !correoT || !contrasenaT) {
+       console.error("Faltan datos en el body");
+       return res.status(400).json({ message: "Faltan datos" });
     }
 
     const hash = await bcrypt.hash(contrasenaT, 10);
 
-    const sql = `
-      INSERT INTO Terapeuta (nombreT, correoT, contrasenaT)
-      VALUES (?, ?, ?)
-    `;
+    const sql = `INSERT INTO Terapeuta (idCedula, nombreT, correoT, contrasenaT) VALUES (?, ?, ?, ?)`;
+    
+    // Ejecución con log
+    console.log("Intentando insertar en MySQL...");
+    await pool.execute(sql, [parseInt(idCedula), nombreT, correoT, hash]);
+    
+    console.log("¡Inserción exitosa!");
+    return res.status(201).json({ message: "OK", id: idCedula });
 
-    const [result] = await pool.execute(sql, [nombreT, correoT, hash]);
-
-    return res.status(201).json({ message: "Terapeuta registrado", idCedula: result.insertId });
   } catch (err) {
-    if (err.code === "ER_DUP_ENTRY") return res.status(409).json({ message: "El correoT ya existe" });
-    return res.status(500).json({ error: err.code, message: err.message });
-  }
-}
+    // ESTO TIENE QUE SALIR EN LA TERMINAL SÍ O SÍ
+    console.log("**************************************");
+    console.log("ERROR DETECTADO:", err);
+    console.log("CÓDIGO:", err.code);
+    console.log("MENSAJE:", err.message);
+    console.log("**************************************");
 
-async function loginTerapeuta(req, res) {
-  try {
-    const { correoT, contrasenaT } = req.body;
-
-    if (!correoT || !contrasenaT) {
-      return res.status(400).json({ message: "Faltan campos: correoT, contrasenaT" });
-    }
-
-    const [rows] = await pool.execute(
-      "SELECT idCedula, nombreT, correoT, contrasenaT FROM Terapeuta WHERE correoT = ? LIMIT 1",
-      [correoT]
-    );
-
-    if (rows.length === 0) return res.status(401).json({ message: "Credenciales invalidas" });
-
-    const terapeuta = rows[0];
-    const ok = await bcrypt.compare(contrasenaT, terapeuta.contrasenaT);
-    if (!ok) return res.status(401).json({ message: "Credenciales invalidas" });
-
-    const token = signToken({ role: "terapeuta", id: terapeuta.idCedula, correo: terapeuta.correoT });
-
-    return res.json({
-      message: "Login OK",
-      role: "terapeuta",
-      token,
-      terapeuta: { idCedula: terapeuta.idCedula, nombreT: terapeuta.nombreT, correoT: terapeuta.correoT },
+    return res.status(500).json({ 
+      error: "Error interno", 
+      sqlError: err.code,
+      details: err.message 
     });
-  } catch (err) {
-    return res.status(500).json({ error: err.code, message: err.message });
   }
 }
 
-module.exports = { signupTerapeuta, loginTerapeuta };
+module.exports = { signupTerapeuta };

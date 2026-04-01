@@ -9,24 +9,43 @@ function signToken(payload) {
 
 async function signupTerapeuta(req, res) {
   try {
-    const { nombreT, correoT, contrasenaT } = req.body;
+    // 1. Agregamos idCedula a la extracción de datos
+    const { idCedula, nombreT, correoT, contrasenaT } = req.body;
 
-    if (!nombreT || !correoT || !contrasenaT) {
-      return res.status(400).json({ message: "Faltan campos: nombreT, correoT, contrasenaT" });
+    // 2. Validación: idCedula ahora es obligatoria
+    if (!idCedula || !nombreT || !correoT || !contrasenaT) {
+      return res.status(400).json({ 
+        message: "Faltan campos: idCedula, nombreT, correoT, contrasenaT" 
+      });
     }
 
     const hash = await bcrypt.hash(contrasenaT, 10);
 
+    // 3. SQL: Incluimos idCedula en el INSERT
     const sql = `
-      INSERT INTO Terapeuta (nombreT, correoT, contrasenaT)
-      VALUES (?, ?, ?)
+      INSERT INTO Terapeuta (idCedula, nombreT, correoT, contrasenaT)
+      VALUES (?, ?, ?, ?)
     `;
 
-    const [result] = await pool.execute(sql, [nombreT, correoT, hash]);
+    // 4. Ejecución: idCedula es la llave primaria manual
+    await pool.execute(sql, [idCedula, nombreT, correoT, hash]);
 
-    return res.status(201).json({ message: "Terapeuta registrado", idCedula: result.insertId });
+    return res.status(201).json({ 
+      message: "Terapeuta registrado con éxito", 
+      idCedula: idCedula 
+    });
+
   } catch (err) {
-    if (err.code === "ER_DUP_ENTRY") return res.status(409).json({ message: "El correoT ya existe" });
+    console.error("=== ERROR EN REGISTRO TERAPEUTA ===");
+    console.error(err);
+
+    // Error por si la cédula o el correo ya existen
+    if (err.code === "ER_DUP_ENTRY") {
+      return res.status(409).json({ 
+        message: "El correo o la cédula ya están registrados" 
+      });
+    }
+    
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }
@@ -50,13 +69,21 @@ async function loginTerapeuta(req, res) {
     const ok = await bcrypt.compare(contrasenaT, terapeuta.contrasenaT);
     if (!ok) return res.status(401).json({ message: "Credenciales invalidas" });
 
-    const token = signToken({ role: "terapeuta", id: terapeuta.idCedula, correo: terapeuta.correoT });
+    const token = signToken({ 
+      role: "terapeuta", 
+      id: terapeuta.idCedula, 
+      correo: terapeuta.correoT 
+    });
 
     return res.json({
       message: "Login OK",
       role: "terapeuta",
       token,
-      terapeuta: { idCedula: terapeuta.idCedula, nombreT: terapeuta.nombreT, correoT: terapeuta.correoT },
+      terapeuta: { 
+        idCedula: terapeuta.idCedula, 
+        nombreT: terapeuta.nombreT, 
+        correoT: terapeuta.correoT 
+      },
     });
   } catch (err) {
     return res.status(500).json({ error: err.code, message: err.message });

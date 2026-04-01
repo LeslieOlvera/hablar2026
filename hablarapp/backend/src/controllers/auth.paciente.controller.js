@@ -9,10 +9,8 @@ function signToken(payload) {
 
 async function signupPaciente(req, res) {
   try {
-    // 1. Agregamos fk_idCedula que viene desde Android
     const { nombreP, correoP, contrasenaP, estrella, fk_idCedula } = req.body;
 
-    // 2. Validación: fk_idCedula es OBLIGATORIA por tu CONSTRAINT en SQL
     if (!nombreP || !correoP || !contrasenaP || !fk_idCedula) {
       return res.status(400).json({ 
         message: "Faltan campos: nombreP, correoP, contrasenaP o fk_idCedula" 
@@ -21,13 +19,11 @@ async function signupPaciente(req, res) {
 
     const hash = await bcrypt.hash(contrasenaP, 10);
 
-    // 3. SQL con la columna fk_idCedula incluida
     const sql = `
       INSERT INTO Paciente (nombreP, correoP, contrasenaP, estrella, fk_idCedula)
       VALUES (?, ?, ?, ?, ?)
     `;
 
-    // 4. Ejecución (id_paciente no se manda porque es AUTO_INCREMENT)
     const [result] = await pool.execute(sql, [
       nombreP, 
       correoP, 
@@ -44,7 +40,6 @@ async function signupPaciente(req, res) {
   } catch (err) {
     console.error("ERROR EN REGISTRO PACIENTE:", err);
 
-    // Error específico de Llave Foránea (si la cédula no existe en la tabla Terapeuta)
     if (err.code === "ER_NO_REFERENCED_ROW_2") {
       return res.status(400).json({ 
         message: "La cédula del terapeuta no existe. Registra al terapeuta primero." 
@@ -67,11 +62,23 @@ async function loginPaciente(req, res) {
       return res.status(400).json({ message: "Faltan campos: correoP, contrasenaP" });
     }
 
-    // Agregamos fk_idCedula al SELECT para saber quién es su terapeuta al loguearse
-    const [rows] = await pool.execute(
-      "SELECT id_paciente, nombreP, correoP, contrasenaP, estrella, fk_idCedula FROM Paciente WHERE correoP = ? LIMIT 1",
-      [correoP]
-    );
+    // CAMBIO AQUÍ: Usamos INNER JOIN para traer el nombre del Terapeuta (nombreT)
+    const sql = `
+      SELECT 
+        p.id_paciente, 
+        p.nombreP, 
+        p.correoP, 
+        p.contrasenaP, 
+        p.estrella, 
+        p.fk_idCedula,
+        t.nombreT 
+      FROM Paciente p
+      INNER JOIN Terapeuta t ON p.fk_idCedula = t.idCedula
+      WHERE p.correoP = ? 
+      LIMIT 1
+    `;
+
+    const [rows] = await pool.execute(sql, [correoP]);
 
     if (rows.length === 0) return res.status(401).json({ message: "Credenciales invalidas" });
 
@@ -95,10 +102,12 @@ async function loginPaciente(req, res) {
         nombreP: paciente.nombreP,
         correoP: paciente.correoP,
         estrella: paciente.estrella,
-        fk_idCedula: paciente.fk_idCedula
+        fk_idCedula: paciente.fk_idCedula,
+        nombreT: paciente.nombreT // <--- Ahora enviamos el nombre del doctor al cel
       },
     });
   } catch (err) {
+    console.error("ERROR EN LOGIN PACIENTE:", err);
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }

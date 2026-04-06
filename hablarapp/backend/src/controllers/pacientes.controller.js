@@ -1,15 +1,16 @@
 const { pool } = require("../db");
 
-// GET /pacientes (solo los pacientes del terapeuta que hace la petición)
+// GET /pacientes
+// Permite filtrar por ?fk_idCedula=XXX desde Android o traer todos si no se envía
 async function getPacientes(req, res) {
   try {
-    // Si usas el middleware de autenticación, el id del terapeuta viene en req.user.id
-    // Aquí asumo que recibes la cedula por query o por el token
+    // Capturamos la cédula que viene como parámetro en la URL (?fk_idCedula=123)
     const { fk_idCedula } = req.query; 
 
     let sql = "SELECT id_paciente, nombreP, correoP, estrella, fk_idCedula FROM Paciente";
     let params = [];
 
+    // Si recibimos la cédula, añadimos el filtro WHERE para que la lista sea verídica
     if (fk_idCedula) {
       sql += " WHERE fk_idCedula = ?";
       params.push(fk_idCedula);
@@ -20,6 +21,7 @@ async function getPacientes(req, res) {
     const [rows] = await pool.execute(sql, params);
     return res.json(rows);
   } catch (err) {
+    console.error("Error en getPacientes:", err);
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }

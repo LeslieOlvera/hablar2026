@@ -1,32 +1,112 @@
 const { pool } = require("../db");
 
-// GET /pacientes
-// Permite filtrar por ?fk_idCedula=XXX desde Android o traer todos si no se envía
+// --- FUNCIÓN INTERNA: Calcula estrellas según tu lógica del 10% al 90% ---
+function calcularEstrellas(porcentaje) {
+    const p = parseFloat(porcentaje);
+    if (p >= 90) return 5;
+    if (p >= 70) return 4;
+    if (p >= 50) return 3;
+    if (p >= 30) return 2;
+    if (p >= 10) return 1;
+    return 0;
+}
+
+// 1. REGISTRAR AVANCE (El niño envía el id_ejercicio)
+async function guardarProgreso(req, res) {
+    const connection = await pool.getConnection();
+    try {
+        const { id_paciente, id_ejercicio, porcentaje, duracion } = req.body;
+        
+        // Fecha actual en formato YYYY-MM-DD para MySQL
+        const fechaHoy = new Date().toISOString().split('T')[0];
+        const estrellasNuevas = calcularEstrellas(porcentaje);
+
+        await connection.beginTransaction();
+
+        // A) Insertar el historial en la tabla 'Realizar'
+        const sqlRealizar = `
+            INSERT INTO Realizar (fechaRealiza, porcentaje, duracion, estrellas_ganadas, id_paciente, id_ejercicio)
+            VALUES (?, ?, ?, ?, ?, ?)
+        `;
+        await connection.execute(sqlRealizar, [fechaHoy, porcentaje, duracion, estrellasNuevas, id_paciente, id_ejercicio]);
+
+        // B) SUMAR las estrellas al total acumulado del Paciente (No sobreescribe)
+        const sqlSumarEstrellas = `
+            UPDATE Paciente 
+            SET estrella = estrella + ? 
+            WHERE id_paciente = ?
+        `;
+        await connection.execute(sqlSumarEstrellas, [estrellasNuevas, id_paciente]);
+
+        await connection.commit();
+
+        return res.json({ 
+            message: "Progreso guardado correctamente", 
+            estrellasGanadas: estrellasNuevas 
+        });
+
+    } catch (err) {
+        await connection.rollback();
+        console.error("Error en guardarProgreso:", err);
+        return res.status(500).json({ error: err.code, message: err.message });
+    } finally {
+        connection.release();
+    }
+}
+
+// 2. OBTENER PROGRESO POR DÍA (Para el calendario, usando solo IDs)
+async function getProgresoDia(req, res) {
+    try {
+        const { id } = req.params; // ID del paciente
+        const { fecha } = req.query; // Fecha YYYY-MM-DD
+
+        if (!fecha) {
+            return res.status(400).json({ message: "La fecha es requerida (YYYY-MM-DD)" });
+        }
+
+        // Consultamos solo los datos de la tabla Realizar y el nivel de la tabla Ejercicio
+        const sql = `
+            SELECT 
+                r.id_ejercicio, 
+                e.nivel, 
+                r.porcentaje, 
+                r.duracion, 
+                r.estrellas_ganadas
+            FROM Realizar r
+            INNER JOIN Ejercicio e ON r.id_ejercicio = e.id_Ejercicio
+            WHERE r.id_paciente = ? AND r.fechaRealiza = ?
+            ORDER BY r.id_realizar DESC
+        `;
+
+        const [rows] = await pool.execute(sql, [id, fecha]);
+        return res.json(rows);
+    } catch (err) {
+        console.error("Error en getProgresoDia:", err);
+        return res.status(500).json({ error: err.code, message: err.message });
+    }
+}
+
+// 3. GET /pacientes (Listado general para el Terapeuta)
 async function getPacientes(req, res) {
   try {
-    // Capturamos la cédula que viene como parámetro en la URL (?fk_idCedula=123)
     const { fk_idCedula } = req.query; 
-
     let sql = "SELECT id_paciente, nombreP, correoP, estrella, fk_idCedula FROM Paciente";
     let params = [];
 
-    // Si recibimos la cédula, añadimos el filtro WHERE para que la lista sea verídica
     if (fk_idCedula) {
       sql += " WHERE fk_idCedula = ?";
       params.push(fk_idCedula);
     }
 
     sql += " ORDER BY id_paciente DESC";
-
     const [rows] = await pool.execute(sql, params);
     return res.json(rows);
   } catch (err) {
-    console.error("Error en getPacientes:", err);
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }
 
-// GET /pacientes/:id
+// 4. GET /pacientes/:id
 async function getPacienteById(req, res) {
   try {
     const id = Number(req.params.id);
@@ -41,54 +121,49 @@ async function getPacienteById(req, res) {
   }
 }
 
-// PUT /pacientes/:id
+// 5. PUT /pacientes/:id
 async function updatePaciente(req, res) {
   try {
     const id = Number(req.params.id);
     const { nombreP, correoP, estrella, fk_idCedula } = req.body;
-
     const fields = [];
     const values = [];
 
     if (nombreP !== undefined) { fields.push("nombreP = ?"); values.push(nombreP); }
     if (correoP !== undefined) { fields.push("correoP = ?"); values.push(correoP); }
     if (estrella !== undefined) { fields.push("estrella = ?"); values.push(estrella); }
-    // Permitir cambiar de terapeuta si fuera necesario
     if (fk_idCedula !== undefined) { fields.push("fk_idCedula = ?"); values.push(fk_idCedula); }
 
-    if (fields.length === 0) {
-      return res.status(400).json({ message: "Nada para actualizar" });
-    }
+    if (fields.length === 0) return res.status(400).json({ message: "Nada para actualizar" });
 
     values.push(id);
-
     const sql = `UPDATE Paciente SET ${fields.join(", ")} WHERE id_paciente = ?`;
     const [result] = await pool.execute(sql, values);
 
     if (result.affectedRows === 0) return res.status(404).json({ message: "Paciente no encontrado" });
-
     return res.json({ message: "Paciente actualizado" });
   } catch (err) {
-    if (err.code === "ER_NO_REFERENCED_ROW_2") {
-        return res.status(400).json({ message: "La cédula del terapeuta no existe" });
-    }
-    if (err.code === "ER_DUP_ENTRY") return res.status(409).json({ message: "correoP ya existe" });
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }
 
-// DELETE /pacientes/:id
+// 6. DELETE /pacientes/:id
 async function deletePaciente(req, res) {
   try {
     const id = Number(req.params.id);
     const [result] = await pool.execute("DELETE FROM Paciente WHERE id_paciente = ?", [id]);
-
     if (result.affectedRows === 0) return res.status(404).json({ message: "Paciente no encontrado" });
-
     return res.json({ message: "Paciente eliminado" });
   } catch (err) {
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }
 
-module.exports = { getPacientes, getPacienteById, updatePaciente, deletePaciente };
+module.exports = { 
+    getPacientes, 
+    getPacienteById, 
+    updatePaciente, 
+    deletePaciente, 
+    guardarProgreso,
+    getProgresoDia 
+};

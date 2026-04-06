@@ -1,24 +1,19 @@
-const express = require("express");
-const router = express.Router();
-const pacienteController = require("../controllers/paciente.controller");
+const router = require("express").Router();
+const { auth, requireTerapeuta, allowTerapeutaOrSelfPaciente } = require("../middlewares/auth");
 
-// --- RUTAS DE PACIENTE ---
+// NOTA: Asegúrate de que el archivo en la carpeta controllers se llame "pacientes.controller.js"
+const { 
+    getPacientes, 
+    getPacienteById, 
+    updatePaciente, 
+    deletePaciente 
+} = require("../controllers/pacientes.controller"); // <-- Aquí estaba el error (faltaba la 's')
 
-// GET /pacientes 
-// Esta es la ruta principal. Si Android envía ?fk_idCedula=XXX, 
-// el controlador filtrará los resultados automáticamente.
-router.get("/", pacienteController.getPacientes);
-
-// GET /pacientes/:id
-// Para obtener el detalle de un solo niño por su ID automático
-router.get("/:id", pacienteController.getPacienteById);
-
-// PUT /pacientes/:id
-// Para actualizar datos del niño (nombre, estrellas, etc.)
-router.put("/:id", pacienteController.updatePaciente);
-
-// DELETE /pacientes/:id
-// Para eliminar un paciente de la lista
-router.delete("/:id", pacienteController.deletePaciente);
+// CRUD protegido con tus middlewares originales
+// El GET / ahora recibirá el fk_idCedula desde Android para filtrar
+router.get("/", auth, requireTerapeuta, getPacientes); 
+router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
+router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
+router.delete("/:id", auth, requireTerapeuta, deletePaciente);
 
 module.exports = router;

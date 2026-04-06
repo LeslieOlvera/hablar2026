@@ -1,17 +1,20 @@
 const router = require("express").Router();
 const { auth, requireTerapeuta, allowTerapeutaOrSelfPaciente } = require("../middlewares/auth");
 
-// NOTA: Asegúrate de que el archivo en la carpeta controllers se llame "pacientes.controller.js"
+// Importamos las funciones del controlador
 const { 
     getPacientes, 
     getPacienteById, 
     updatePaciente, 
     deletePaciente 
-} = require("../controllers/pacientes.controller"); // <-- Aquí estaba el error (faltaba la 's')
+} = require("../controllers/pacientes.controller");
 
-// CRUD protegido con tus middlewares originales
-// El GET / ahora recibirá el fk_idCedula desde Android para filtrar
-router.get("/", auth, requireTerapeuta, getPacientes); 
+// --- RUTAS ---
+
+// 1. GET / - QUITAMOS 'auth' y 'requireTerapeuta' para que Android pueda entrar sin Token
+router.get("/", getPacientes); 
+
+// 2. Las demás rutas las dejamos protegidas (por ahora no las usaremos en el Home)
 router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
 router.delete("/:id", auth, requireTerapeuta, deletePaciente);

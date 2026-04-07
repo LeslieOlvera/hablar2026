@@ -17,7 +17,8 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-async function testDbConnection() {
+// Prueba la conexión al arrancar el servidor
+(async () => {
   try {
     const conn = await pool.getConnection();
     await conn.ping();
@@ -26,6 +27,9 @@ async function testDbConnection() {
   } catch (err) {
     console.error("Error conectando a MySQL:", err.code, err.message);
   }
-}
+})();
 
-module.exports = { pool, testDbConnection };
+
+// Al final de tu db.js (reemplaza las exportaciones anteriores)
+module.exports = pool;         // Permite: const pool = require("../db")
+module.exports.pool = pool;    // Permite: const { pool } = require("../db")

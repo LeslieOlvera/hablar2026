@@ -17,23 +17,16 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-// Esta función la dejamos AQUÍ ADENTRO para que se ejecute sola
 const testDbConnection = async () => {
   try {
     const conn = await pool.getConnection();
-    await conn.ping();
+    console.log("Conectado a MySQL ✅ (Modo Promesa)");
     conn.release();
-    console.log("Conectado a MySQL ✅");
   } catch (err) {
-    console.error("Error conectando a MySQL:", err.code, err.message);
+    console.error("❌ Error conectando a MySQL:", err.message);
   }
 };
 
-// La ejecutamos de una vez
 testDbConnection();
 
-// EXPORTACIÓN "TODOTERRENO"
-// Esto permite que todos tus controladores funcionen, usen llaves {} o no.
-module.exports = pool; 
-module.exports.pool = pool; 
-module.exports.testDbConnection = testDbConnection;
+module.exports = { pool };

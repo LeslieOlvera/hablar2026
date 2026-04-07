@@ -1,4 +1,5 @@
-const pool = require("../db");
+// CORRECCIÓN 1: Añadir llaves { } para importar correctamente el pool desde db.js
+const { pool } = require("../db");
 
 const asignarEjercicios = async (req, res) => {
     const asignaciones = req.body; 
@@ -11,7 +12,8 @@ const asignarEjercicios = async (req, res) => {
     try {
         // 2. Bucle para insertar cada ejercicio
         for (const asignacion of asignaciones) {
-            await pool.query(
+            // CORRECCIÓN 2: Cambiar .query por .execute (requerido por mysql2/promise)
+            await pool.execute(
                 "INSERT INTO Asignacion (fecha, fk_terapeutaA, fk_paciente, fk_idEjercicio) VALUES (?, ?, ?, ?)",
                 [
                     asignacion.fecha, 
@@ -29,7 +31,7 @@ const asignarEjercicios = async (req, res) => {
         });
 
     } catch (error) {
-        // 4. Log detallado para que tú veas el error real en VS Code
+        // 4. Log detallado para que tú veas el error real en la terminal
         console.error("ERROR EN MYSQL:", error.sqlMessage || error.message);
         res.status(500).json({ 
             message: "Error al guardar en la base de datos", 

@@ -17,8 +17,8 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-// Prueba la conexión al arrancar el servidor
-(async () => {
+// Esta función la dejamos AQUÍ ADENTRO para que se ejecute sola
+const testDbConnection = async () => {
   try {
     const conn = await pool.getConnection();
     await conn.ping();
@@ -27,9 +27,13 @@ const pool = mysql.createPool({
   } catch (err) {
     console.error("Error conectando a MySQL:", err.code, err.message);
   }
-})();
+};
 
+// La ejecutamos de una vez
+testDbConnection();
 
-// Al final de tu db.js (reemplaza las exportaciones anteriores)
-module.exports = pool;         // Permite: const pool = require("../db")
-module.exports.pool = pool;    // Permite: const { pool } = require("../db")
+// EXPORTACIÓN "TODOTERRENO"
+// Esto permite que todos tus controladores funcionen, usen llaves {} o no.
+module.exports = pool; 
+module.exports.pool = pool; 
+module.exports.testDbConnection = testDbConnection;

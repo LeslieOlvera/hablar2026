@@ -5,7 +5,7 @@ const DB_PORT = 3306;
 const DB_USER = "root";
 const DB_PASS = "maria123?";
 const DB_NAME = "app_tshusuarios";
-module.exports = pool.promise();
+
 const pool = mysql.createPool({
   host: DB_HOST,
   port: DB_PORT,

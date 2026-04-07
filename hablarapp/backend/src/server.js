@@ -1,6 +1,6 @@
 const app = require("./app");
 const { testDbConnection } = require("./db");
-
+const { testDbConnection } = require('./config/db');
 const API_PORT = 3000;
 
 // Probamos la conexión antes de iniciar

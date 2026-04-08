@@ -75,6 +75,12 @@ async function getPacienteById(req, res) {
   try {
     const id = req.params.id;
     const [rows] = await pool.execute("SELECT id_paciente, nombreP, correoP, estrella, fk_idCedula FROM Paciente WHERE id_paciente = ?", [id]);
+    
+    // CORRECCIÓN: Si no hay resultados, mandar 404
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "Paciente no encontrado o Terapia finalizada" });
+    }
+    
     return res.json(rows[0]);
   } catch (err) {
     return res.status(500).json({ error: err.code, message: err.message });

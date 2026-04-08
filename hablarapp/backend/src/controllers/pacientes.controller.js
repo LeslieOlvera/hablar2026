@@ -96,7 +96,7 @@ async function deletePaciente(req, res) {
   try {
     const id = req.params.id;
     await pool.execute("DELETE FROM Paciente WHERE id_paciente = ?", [id]);
-    return res.json({ message: "Paciente eliminado" });
+    return res.json({ success: true, message: "Paciente eliminado correctamente" });
   } catch (err) {
     return res.status(500).json({ error: err.code, message: err.message });
   }

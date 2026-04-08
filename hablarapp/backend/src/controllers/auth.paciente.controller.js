@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const { pool } = require("../db");
 const { JWT_SECRET } = require("../middlewares/auth");
 
+// Objeto para guardar códigos temporalmente en memoria
+const codesCache = {}; 
+
 function signToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 }
@@ -62,7 +65,6 @@ async function loginPaciente(req, res) {
       return res.status(400).json({ message: "Faltan campos: correoP, contrasenaP" });
     }
 
-    // CAMBIO AQUÍ: Usamos INNER JOIN para traer el nombre del Terapeuta (nombreT)
     const sql = `
       SELECT 
         p.id_paciente, 
@@ -103,7 +105,7 @@ async function loginPaciente(req, res) {
         correoP: paciente.correoP,
         estrella: paciente.estrella,
         fk_idCedula: paciente.fk_idCedula,
-        nombreT: paciente.nombreT // <--- Ahora enviamos el nombre del doctor al cel
+        nombreT: paciente.nombreT 
       },
     });
   } catch (err) {
@@ -112,4 +114,60 @@ async function loginPaciente(req, res) {
   }
 }
 
-module.exports = { signupPaciente, loginPaciente };
+// --- NUEVAS FUNCIONES DE RECUPERACIÓN ---
+
+async function sendCodePaciente(req, res) {
+    try {
+        const { correoP } = req.body;
+        const [rows] = await pool.execute("SELECT id_paciente FROM Paciente WHERE correoP = ?", [correoP]);
+        
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "El correo no está registrado como paciente." });
+        }
+
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        codesCache[correoP] = code;
+
+        console.log(`\n📧 [RECUPERACIÓN] Código para ${correoP}: ${code}\n`);
+
+        return res.json({ success: true, message: "Código generado con éxito." });
+    } catch (err) {
+        return res.status(500).json({ message: "Error interno del servidor." });
+    }
+}
+
+async function verifyCodePaciente(req, res) {
+    const { correoP, code } = req.body;
+    if (codesCache[correoP] && codesCache[correoP] === code) {
+        return res.json({ success: true, message: "Código verificado correctamente." });
+    } else {
+        return res.status(400).json({ message: "Código incorrecto o expirado." });
+    }
+}
+
+async function resetPasswordPaciente(req, res) {
+    try {
+        const { correoP, code, nuevaContrasena } = req.body;
+
+        if (codesCache[correoP] !== code) {
+            return res.status(401).json({ message: "Sesión de recuperación inválida." });
+        }
+
+        const hash = await bcrypt.hash(nuevaContrasena, 10);
+        await pool.execute("UPDATE Paciente SET contrasenaP = ? WHERE correoP = ?", [hash, correoP]);
+
+        delete codesCache[correoP];
+
+        return res.json({ success: true, message: "Contraseña actualizada." });
+    } catch (err) {
+        return res.status(500).json({ message: "Error al actualizar contraseña." });
+    }
+}
+
+module.exports = { 
+    signupPaciente, 
+    loginPaciente, 
+    sendCodePaciente, 
+    verifyCodePaciente, 
+    resetPasswordPaciente 
+};

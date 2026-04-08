@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const { pool } = require("../db");
 const { JWT_SECRET } = require("../middlewares/auth");
 
+// Objeto para guardar códigos temporalmente en memoria
+const codesCache = {}; 
+
 function signToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
 }
@@ -90,4 +93,65 @@ async function loginTerapeuta(req, res) {
   }
 }
 
-module.exports = { signupTerapeuta, loginTerapeuta };
+// --- NUEVAS FUNCIONES DE RECUPERACIÓN PARA TERAPEUTA ---
+
+async function sendCodeTerapeuta(req, res) {
+    try {
+        const { correoT } = req.body;
+        
+        // Verificamos si el terapeuta existe
+        const [rows] = await pool.execute("SELECT idCedula FROM Terapeuta WHERE correoT = ?", [correoT]);
+        
+        if (rows.length === 0) {
+            return res.status(404).json({ message: "El correo no está registrado como terapeuta." });
+        }
+
+        const code = Math.floor(100000 + Math.random() * 900000).toString();
+        codesCache[correoT] = code;
+
+        console.log(`\n📧 [RECUPERACIÓN TERAPEUTA] Código para ${correoT}: ${code}\n`);
+
+        return res.json({ success: true, message: "Código generado con éxito." });
+    } catch (err) {
+        return res.status(500).json({ message: "Error interno del servidor." });
+    }
+}
+
+async function verifyCodeTerapeuta(req, res) {
+    const { correoT, code } = req.body;
+    
+    if (codesCache[correoT] && codesCache[correoT] === code) {
+        return res.json({ success: true, message: "Código verificado correctamente." });
+    } else {
+        return res.status(400).json({ message: "Código incorrecto o expirado." });
+    }
+}
+
+async function resetPasswordTerapeuta(req, res) {
+    try {
+        const { correoT, code, nuevaContrasena } = req.body;
+
+        if (codesCache[correoT] !== code) {
+            return res.status(401).json({ message: "Sesión de recuperación inválida." });
+        }
+
+        const hash = await bcrypt.hash(nuevaContrasena, 10);
+        
+        // Actualizamos la contraseña usando el correo como referencia
+        await pool.execute("UPDATE Terapeuta SET contrasenaT = ? WHERE correoT = ?", [hash, correoT]);
+
+        delete codesCache[correoT];
+
+        return res.json({ success: true, message: "Contraseña actualizada." });
+    } catch (err) {
+        return res.status(500).json({ message: "Error al actualizar contraseña." });
+    }
+}
+
+module.exports = { 
+    signupTerapeuta, 
+    loginTerapeuta,
+    sendCodeTerapeuta,
+    verifyCodeTerapeuta,
+    resetPasswordTerapeuta
+};

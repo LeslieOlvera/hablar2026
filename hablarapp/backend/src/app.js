@@ -24,4 +24,6 @@ app.use("/pacientes", pacientesRoutes);
 // En Android, tu URL de Retrofit debería apuntar a: /asignaciones/asignar
 app.use("/asignaciones", asignacionesRoutes);
 
+
+
 module.exports = app;

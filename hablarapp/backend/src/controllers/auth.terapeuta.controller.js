@@ -93,7 +93,7 @@ async function loginTerapeuta(req, res) {
   }
 }
 
-// --- NUEVAS FUNCIONES DE RECUPERACIÓN PARA TERAPEUTA ---
+
 
 async function sendCodeTerapeuta(req, res) {
     try {

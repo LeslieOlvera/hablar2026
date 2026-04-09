@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const JWT_SECRET = "dev_secret_cambia_esto"; // luego lo mueves a .env
+const JWT_SECRET = "dev_secret_cambia_esto"; 
 
 function auth(req, res, next) {
   const h = req.headers.authorization || "";

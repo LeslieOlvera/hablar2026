@@ -27,8 +27,8 @@ const testDbConnection = async () => {
   }
 };
 
-// Se ejecuta aquí para que lo veas en consola al iniciar
+
 testDbConnection();
 
-// IMPORTANTE: Se agregan ambos al objeto de exportación
+
 module.exports = { pool, testDbConnection };

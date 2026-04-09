@@ -4,7 +4,6 @@ const { pool } = require("../db");
 const asignarEjercicios = async (req, res) => {
     const asignaciones = req.body; 
 
-    // 1. Validar que lleguen datos
     if (!Array.isArray(asignaciones) || asignaciones.length === 0) {
         return res.status(400).json({ message: "No se recibieron datos para asignar." });
     }
@@ -12,7 +11,7 @@ const asignarEjercicios = async (req, res) => {
     try {
         // 2. Bucle para insertar cada ejercicio
         for (const asignacion of asignaciones) {
-            // CORRECCIÓN 2: Cambiar .query por .execute (requerido por mysql2/promise)
+          
             await pool.execute(
                 "INSERT INTO Asignacion (fecha, fk_terapeutaA, fk_paciente, fk_idEjercicio) VALUES (?, ?, ?, ?)",
                 [

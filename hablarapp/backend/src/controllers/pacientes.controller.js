@@ -27,7 +27,7 @@ async function guardarProgreso(req, res) {
         const sqlSumarEstrellas = `UPDATE Paciente SET estrella = estrella + ? WHERE id_paciente = ?`;
         await connection.execute(sqlSumarEstrellas, [estrellasNuevas, id_paciente]);
 
-        // 3. CORRECCIÓN: Marcar la asignación como completada para que desaparezca de pendientes
+        // 3.  Marcar la asignación como completada para que desaparezca de pendientes
         const sqlCompletarAsignacion = `
             UPDATE Asignacion 
             SET completado = 1 
@@ -108,7 +108,7 @@ async function deletePaciente(req, res) {
   }
 }
 
-// --- NUEVA FUNCIÓN PARA EL HOME DEL PACIENTE (CORREGIDA CON PLAZO DE 7 DÍAS) ---
+// --- NUEVA FUNCIÓN PARA EL HOME DEL PACIENTE (PLAZO DE 7 DÍAS) ---
 async function getEjerciciosAsignados(req, res) {
     try {
         const { id } = req.params;

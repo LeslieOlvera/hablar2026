@@ -19,9 +19,7 @@ app.use("/auth/paciente", pacienteAuthRoutes);
 // CRUD usuarios (Actividad 6)
 app.use("/pacientes", pacientesRoutes);
 
-// --- NUEVA SECCIÓN: ASIGNACIONES ---
-// Esta es la ruta que usará el terapeuta para mandar los ejercicios a la DB
-// En Android, tu URL de Retrofit debería apuntar a: /asignaciones/asignar
+//Ruta para mandar asignacion a la DB
 app.use("/asignaciones", asignacionesRoutes);
 
 

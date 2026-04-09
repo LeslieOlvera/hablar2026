@@ -20,10 +20,10 @@ const pool = mysql.createPool({
 const testDbConnection = async () => {
   try {
     const conn = await pool.getConnection();
-    console.log("Conectado a MySQL ✅ (Modo Promesa)");
+    console.log("Conectado a MySQL  (Modo Promesa)");
     conn.release();
   } catch (err) {
-    console.error("❌ Error conectando a MySQL:", err.message);
+    console.error(" Error conectando a MySQL:", err.message);
   }
 };
 

@@ -2,7 +2,7 @@ const mysql = require("mysql2/promise");
 
 
 
-const DB_HOST = "10.87.5.196";
+const DB_HOST = "192.168.8.94";
 const DB_PORT = 3306;
 const DB_USER = "root";
 const DB_PASS = "maria123?";

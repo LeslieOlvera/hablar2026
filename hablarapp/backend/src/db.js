@@ -1,5 +1,12 @@
 const mysql = require("mysql2/promise");
 
+const PORT = 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor escuchando en http://0.0.0.0:${PORT}`);
+    console.log(`Tu celular debe usar: http://192.168.x.x:${PORT}`);
+});
+
+
 const DB_HOST = "10.127.92.191";
 const DB_PORT = 3306;
 const DB_USER = "root";

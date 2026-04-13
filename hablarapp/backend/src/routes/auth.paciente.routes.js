@@ -11,6 +11,8 @@ const {
 router.post("/signup", signupPaciente);
 router.post("/login", loginPaciente);
 
+
+
 // --- RUTAS DE RECUPERACIÓN DE CONTRASEÑA ---
 
 // 1. Generar y enviar código al correo

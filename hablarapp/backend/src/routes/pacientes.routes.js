@@ -16,4 +16,5 @@ router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
 router.delete("/:id", auth, requireTerapeuta, deletePaciente);
 
+
 module.exports = router;

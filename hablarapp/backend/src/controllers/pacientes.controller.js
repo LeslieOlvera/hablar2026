@@ -19,15 +19,12 @@ async function guardarProgreso(req, res) {
 
         await connection.beginTransaction();
 
-        // 1. Insertar registro en Realizar
         const sqlRealizar = `INSERT INTO Realizar (fechaRealiza, porcentaje, duracion, estrellas_ganadas, id_paciente, id_ejercicio) VALUES (?, ?, ?, ?, ?, ?)`;
         await connection.execute(sqlRealizar, [fechaHoy, porcentaje, duracion, estrellasNuevas, id_paciente, id_ejercicio]);
 
-        // 2. Sumar estrellas al paciente
         const sqlSumarEstrellas = `UPDATE Paciente SET estrella = estrella + ? WHERE id_paciente = ?`;
         await connection.execute(sqlSumarEstrellas, [estrellasNuevas, id_paciente]);
 
-        // 3.  Marcar la asignación como completada para que desaparezca de pendientes
         const sqlCompletarAsignacion = `
             UPDATE Asignacion 
             SET completado = 1 
@@ -75,12 +72,9 @@ async function getPacienteById(req, res) {
   try {
     const id = req.params.id;
     const [rows] = await pool.execute("SELECT id_paciente, nombreP, correoP, estrella, fk_idCedula FROM Paciente WHERE id_paciente = ?", [id]);
-    
-    // CORRECCIÓN: Si no hay resultados, mandar 404
     if (rows.length === 0) {
       return res.status(404).json({ message: "Paciente no encontrado o Terapia finalizada" });
     }
-    
     return res.json(rows[0]);
   } catch (err) {
     return res.status(500).json({ error: err.code, message: err.message });
@@ -108,7 +102,6 @@ async function deletePaciente(req, res) {
   }
 }
 
-// --- NUEVA FUNCIÓN PARA EL HOME DEL PACIENTE (PLAZO DE 7 DÍAS) ---
 async function getEjerciciosAsignados(req, res) {
     try {
         const { id } = req.params;
@@ -127,7 +120,35 @@ async function getEjerciciosAsignados(req, res) {
     }
 }
 
+// --- NUEVAS FUNCIONES PARA SUBIDA DE ARCHIVOS ---
+async function subirOrofacial(req, res) {
+    try {
+        const { id_ejercicio } = req.body;
+        const imagen_url = req.file ? `/uploads/orofaciales/${req.file.filename}` : null;
+        if (!id_ejercicio || !imagen_url) return res.status(400).json({ message: "Faltan datos o imagen" });
+        const sql = "INSERT INTO Ejercicio_Orofacial (id_ejercicio, imagen_url) VALUES (?, ?)";
+        await pool.execute(sql, [id_ejercicio, imagen_url]);
+        res.status(201).json({ success: true, message: "Imagen guardada", url: imagen_url });
+    } catch (err) {
+        res.status(500).json({ error: err.code, message: err.message });
+    }
+}
+
+async function subirFonetico(req, res) {
+    try {
+        const { id_ejercicio } = req.body;
+        const voz_url = req.file ? `/uploads/foneticos/${req.file.filename}` : null;
+        if (!id_ejercicio || !voz_url) return res.status(400).json({ message: "Faltan datos o audio" });
+        const sql = "INSERT INTO Ejercicios_Fonetico (id_ejercicio, voz_url) VALUES (?, ?)";
+        await pool.execute(sql, [id_ejercicio, voz_url]);
+        res.status(201).json({ success: true, message: "Audio guardado", url: voz_url });
+    } catch (err) {
+        res.status(500).json({ error: err.code, message: err.message });
+    }
+}
+
 module.exports = { 
     getPacientes, getPacienteById, updatePaciente, deletePaciente, 
-    guardarProgreso, getProgresoDia, getEjerciciosAsignados 
+    guardarProgreso, getProgresoDia, getEjerciciosAsignados,
+    subirOrofacial, subirFonetico
 };

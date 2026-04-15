@@ -6,7 +6,8 @@ const { auth, requireTerapeuta, allowTerapeutaOrSelfPaciente } = require("../mid
 const { 
     getPacientes, getPacienteById, updatePaciente, deletePaciente,
     guardarProgreso, getProgresoDia, getEjerciciosAsignados,
-    subirOrofacial, subirFonetico
+    subirOrofacial, subirFonetico,
+    getHistorialMensual // <--- 1. Agregado aquí
 } = require("../controllers/pacientes.controller");
 
 // Crear carpetas si no existen
@@ -26,10 +27,15 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// --- RUTAS DE PACIENTES ---
 router.get("/", auth, requireTerapeuta, getPacientes);
 router.post("/guardar-progreso", auth, guardarProgreso);
 router.get("/:id/asignados", auth, getEjerciciosAsignados);
 router.get("/:id/progreso-dia", auth, getProgresoDia);
+
+
+router.get("/progreso/historial/:id/:mes/:anio", auth, allowTerapeutaOrSelfPaciente, getHistorialMensual);
+
 router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
 router.delete("/:id", auth, requireTerapeuta, deletePaciente);

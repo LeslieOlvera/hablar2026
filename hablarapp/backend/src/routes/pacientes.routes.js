@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
 const { auth, requireTerapeuta, allowTerapeutaOrSelfPaciente } = require("../middlewares/auth");
 const { 
     getPacientes, getPacienteById, updatePaciente, deletePaciente,
@@ -8,7 +9,12 @@ const {
     subirOrofacial, subirFonetico
 } = require("../controllers/pacientes.controller");
 
-// Configuración de Multer para manejar subidas
+// Crear carpetas si no existen
+const uploadDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
+if (!fs.existsSync(path.join(uploadDir, 'orofaciales'))) fs.mkdirSync(path.join(uploadDir, 'orofaciales'));
+if (!fs.existsSync(path.join(uploadDir, 'foneticos'))) fs.mkdirSync(path.join(uploadDir, 'foneticos'));
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const type = file.mimetype.startsWith('image/') ? 'orofaciales' : 'foneticos';
@@ -28,7 +34,7 @@ router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
 router.delete("/:id", auth, requireTerapeuta, deletePaciente);
 
-// Nuevas rutas para recibir archivos desde Android
+// Rutas de subida
 router.post("/subir-orofacial", auth, upload.single('foto'), subirOrofacial);
 router.post("/subir-fonetico", auth, upload.single('audio'), subirFonetico);
 

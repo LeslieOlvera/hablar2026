@@ -131,23 +131,26 @@ async function deletePaciente(req, res) {
   }
 }
 
-async function getEjerciciosAsignados(req, res) {
+const getEjerciciosAsignados = async (req, res) => {
+    const { id } = req.params;
+
     try {
-        const { id } = req.params;
         const sql = `
-            SELECT e.id_Ejercicio as id, e.nivel, e.descripcion as nombre
+            SELECT DISTINCT e.id_Ejercicio as id, e.nivel, e.descripcion as nombre
             FROM asignacion a
             INNER JOIN ejercicio e ON a.fk_idEjercicio = e.id_Ejercicio
             WHERE a.fk_paciente = ? 
               AND a.completado = 0 
               AND a.fecha >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
         `;
+
         const [rows] = await pool.execute(sql, [id]);
-        return res.json(rows);
-    } catch (err) {
-        return res.status(500).json({ error: err.code, message: err.message });
+        res.json(rows);
+    } catch (error) {
+        console.error("Error obteniendo ejercicios asignados:", error);
+        res.status(500).json({ message: "Error del servidor" });
     }
-}
+};
 
 async function subirOrofacial(req, res) {
     try {

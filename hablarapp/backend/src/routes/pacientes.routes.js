@@ -1,6 +1,7 @@
 const router = require("express").Router();
-const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
 
 const {
   auth,
@@ -17,45 +18,43 @@ const {
   getProgresoDia,
   getEjerciciosAsignados,
   getHistorialMensual,
-  subirOrofacial,
   subirFonetico,
+  subirOrofacial,
 } = require("../controllers/pacientes.controller");
 
-// ===============================
-// MULTER
-// ===============================
-const storageOrofacial = multer.diskStorage({
+// Crear carpetas si no existen
+const foneticoDir = path.join(__dirname, "..", "uploads", "foneticos");
+const orofacialDir = path.join(__dirname, "..", "uploads", "orofaciales");
+
+fs.mkdirSync(foneticoDir, { recursive: true });
+fs.mkdirSync(orofacialDir, { recursive: true });
+
+// Configuración de multer
+const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../uploads/orofaciales"));
+    if (req.path === "/subir-fonetico") {
+      cb(null, foneticoDir);
+    } else if (req.path === "/subir-orofacial") {
+      cb(null, orofacialDir);
+    } else {
+      cb(null, path.join(__dirname, "..", "uploads"));
+    }
   },
   filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, `oro_${Date.now()}${ext}`);
+    const extension = path.extname(file.originalname);
+    const nombre = `${Date.now()}-${Math.round(Math.random() * 1e9)}${extension}`;
+    cb(null, nombre);
   },
 });
 
-const storageFonetico = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "../uploads/foneticos"));
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    cb(null, `fon_${Date.now()}${ext}`);
-  },
-});
+const upload = multer({ storage });
 
-const uploadOrofacial = multer({ storage: storageOrofacial });
-const uploadFonetico = multer({ storage: storageFonetico });
-
-// ===============================
-// RUTAS DE PACIENTES
-// ===============================
+// --- RUTAS DE PACIENTES ---
 router.get("/", auth, requireTerapeuta, getPacientes);
 router.post("/guardar-progreso", auth, guardarProgreso);
 
 router.get("/:id/asignados", auth, getEjerciciosAsignados);
 router.get("/:id/progreso-dia", auth, getProgresoDia);
-
 router.get(
   "/progreso/historial/:id/:mes/:anio",
   auth,
@@ -64,19 +63,8 @@ router.get(
 );
 
 // SUBIDA DE EVIDENCIAS
-router.post(
-  "/subir-orofacial",
-  auth,
-  uploadOrofacial.single("foto"),
-  subirOrofacial
-);
-
-router.post(
-  "/subir-fonetico",
-  auth,
-  uploadFonetico.single("audio"),
-  subirFonetico
-);
+router.post("/subir-fonetico", auth, upload.single("audio"), subirFonetico);
+router.post("/subir-orofacial", auth, upload.single("imagen"), subirOrofacial);
 
 router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);

@@ -10,38 +10,6 @@ function calcularEstrellas(porcentaje) {
     return 0;
 }
 
-// Guarda el progreso del ejercicio y actualiza estrellas del paciente
-async function guardarProgreso(req, res) {
-    const connection = await pool.getConnection();
-    try {
-        const { id_paciente, id_ejercicio, porcentaje, duracion } = req.body;
-        const fechaHoy = new Date().toISOString().split('T')[0];
-        const estrellasNuevas = calcularEstrellas(porcentaje);
-
-        await connection.beginTransaction();
-
-        const sqlRealizar = `INSERT INTO realizar (fechaRealiza, porcentaje, duracion, estrellas_ganadas, id_paciente, id_ejercicio) VALUES (?, ?, ?, ?, ?, ?)`;
-        await connection.execute(sqlRealizar, [fechaHoy, porcentaje, duracion, estrellasNuevas, id_paciente, id_ejercicio]);
-
-        const sqlSumarEstrellas = `UPDATE paciente SET estrella = estrella + ? WHERE id_paciente = ?`;
-        await connection.execute(sqlSumarEstrellas, [estrellasNuevas, id_paciente]);
-
-        const sqlCompletarAsignacion = `
-            UPDATE asignacion 
-            SET completado = 1 
-            WHERE fk_paciente = ? AND fk_idEjercicio = ? AND completado = 0 
-            LIMIT 1`;
-        await connection.execute(sqlCompletarAsignacion, [id_paciente, id_ejercicio]);
-
-        await connection.commit();
-        return res.json({ message: "Progreso guardado y ejercicio completado", estrellasGanadas: estrellasNuevas });
-    } catch (err) {
-        await connection.rollback();
-        return res.status(500).json({ error: err.code, message: err.message });
-    } finally {
-        connection.release();
-    }
-}
 
 // Obtiene los ejercicios realizados en un día específico
 async function getProgresoDia(req, res) {
@@ -151,42 +119,189 @@ const getEjerciciosAsignados = async (req, res) => {
         res.status(500).json({ message: "Error del servidor" });
     }
 };
+const subirFonetico = async (req, res) => {
+  try {
+    const idPaciente = req.user?.id;
+    const idEjercicio =
+      req.body.id_ejercicio ||
+      req.body.idEjercicio ||
+      req.body.fk_idEjercicio;
 
-async function subirOrofacial(req, res) {
-    try {
-        const { id_ejercicio } = req.body;
-        const imagen_url = req.file ? `/uploads/orofaciales/${req.file.filename}` : null;
-        if (!id_ejercicio || !imagen_url) return res.status(400).json({ message: "Faltan datos o imagen" });
-        const sql = "INSERT INTO ejercicio_orofacial (id_ejercicio, imagen_url) VALUES (?, ?)";
-        await pool.execute(sql, [id_ejercicio, imagen_url]);
-        res.status(201).json({ success: true, message: "Imagen guardada", url: imagen_url });
-    } catch (err) {
-        res.status(500).json({ error: err.code, message: err.message });
+    if (!idPaciente) {
+      return res.status(401).json({ message: "Usuario no autenticado" });
     }
-}
 
-async function subirFonetico(req, res) {
-    try {
-        const { id_ejercicio } = req.body;
-        const voz_url = req.file ? `/uploads/foneticos/${req.file.filename}` : null;
-        if (!id_ejercicio || !voz_url) return res.status(400).json({ message: "Faltan datos o audio" });
-        const sql = "INSERT INTO ejercicios_fonetico (id_ejercicio, voz_url) VALUES (?, ?)";
-        await pool.execute(sql, [id_ejercicio, voz_url]);
-        res.status(201).json({ success: true, message: "Audio guardado", url: voz_url });
-    } catch (err) {
-        res.status(500).json({ error: err.code, message: err.message });
+    if (!idEjercicio) {
+      return res.status(400).json({ message: "Falta id_ejercicio" });
     }
-}
 
-module.exports = { 
-    getPacientes, 
-    getPacienteById, 
-    updatePaciente, 
-    deletePaciente, 
-    guardarProgreso, 
-    getProgresoDia, 
-    getHistorialMensual, // <-- Exportada
-    getEjerciciosAsignados,
-    subirOrofacial, 
-    subirFonetico
+    if (!req.file) {
+      return res.status(400).json({ message: "No se recibió el audio" });
+    }
+
+    const archivoUrl = `/uploads/foneticos/${req.file.filename}`;
+
+    const [result] = await pool.execute(
+      `INSERT INTO realizar
+        (fechaRealiza, porcentaje, duracion, estrellas_ganadas, tipo_archivo, archivo_url,
+         clasificacion_modelo, confianza_modelo, id_paciente, id_ejercicio)
+       VALUES
+        (NOW(), NULL, NULL, 0, 'audio', ?, NULL, NULL, ?, ?)`,
+      [archivoUrl, idPaciente, idEjercicio]
+    );
+
+    return res.status(201).json({
+      message: "Audio guardado correctamente",
+      archivoUrl,
+      idRealizar: result.insertId,
+    });
+  } catch (error) {
+    console.error("Error en subirFonetico:", error);
+    return res.status(500).json({
+      message: "Error al guardar el audio",
+      error: error.message,
+    });
+  }
+};
+
+const subirOrofacial = async (req, res) => {
+  try {
+    const idPaciente = req.user?.id;
+    const idEjercicio =
+      req.body.id_ejercicio ||
+      req.body.idEjercicio ||
+      req.body.fk_idEjercicio;
+
+    if (!idPaciente) {
+      return res.status(401).json({ message: "Usuario no autenticado" });
+    }
+
+    if (!idEjercicio) {
+      return res.status(400).json({ message: "Falta id_ejercicio" });
+    }
+
+    if (!req.file) {
+      return res.status(400).json({ message: "No se recibió la imagen" });
+    }
+
+    const archivoUrl = `/uploads/orofaciales/${req.file.filename}`;
+
+    const [result] = await pool.execute(
+      `INSERT INTO realizar
+        (fechaRealiza, porcentaje, duracion, estrellas_ganadas, tipo_archivo, archivo_url,
+         clasificacion_modelo, confianza_modelo, id_paciente, id_ejercicio)
+       VALUES
+        (NOW(), NULL, NULL, 0, 'imagen', ?, NULL, NULL, ?, ?)`,
+      [archivoUrl, idPaciente, idEjercicio]
+    );
+
+    return res.status(201).json({
+      message: "Imagen guardada correctamente",
+      archivoUrl,
+      idRealizar: result.insertId,
+    });
+  } catch (error) {
+    console.error("Error en subirOrofacial:", error);
+    return res.status(500).json({
+      message: "Error al guardar la imagen",
+      error: error.message,
+    });
+  }
+};
+
+const guardarProgreso = async (req, res) => {
+  try {
+    const idPaciente = req.user?.id;
+
+    const idEjercicio =
+      req.body.id_ejercicio ||
+      req.body.idEjercicio ||
+      req.body.fk_idEjercicio;
+
+    const porcentaje = req.body.porcentaje ?? null;
+    const duracion = req.body.duracion ?? null;
+    const estrellasGanadas = req.body.estrellas_ganadas ?? 0;
+
+    if (!idPaciente) {
+      return res.status(401).json({ message: "Usuario no autenticado" });
+    }
+
+    if (!idEjercicio) {
+      return res.status(400).json({ message: "Falta id_ejercicio" });
+    }
+
+    // Buscar si ya existe un intento del mismo paciente para ese ejercicio hoy
+    const [rows] = await pool.execute(
+      `SELECT id_realizar
+       FROM realizar
+       WHERE id_paciente = ?
+         AND id_ejercicio = ?
+         AND DATE(fechaRealiza) = CURDATE()
+       ORDER BY id_realizar DESC
+       LIMIT 1`,
+      [idPaciente, idEjercicio]
+    );
+
+    let idRealizar = null;
+
+    if (rows.length > 0) {
+      idRealizar = rows[0].id_realizar;
+
+      await pool.execute(
+        `UPDATE realizar
+         SET porcentaje = ?, duracion = ?, estrellas_ganadas = ?
+         WHERE id_realizar = ?`,
+        [porcentaje, duracion, estrellasGanadas, idRealizar]
+      );
+    } else {
+      const [result] = await pool.execute(
+        `INSERT INTO realizar
+          (fechaRealiza, porcentaje, duracion, estrellas_ganadas, tipo_archivo, archivo_url,
+           clasificacion_modelo, confianza_modelo, id_paciente, id_ejercicio)
+         VALUES
+          (NOW(), ?, ?, ?, NULL, NULL, NULL, NULL, ?, ?)`,
+        [porcentaje, duracion, estrellasGanadas, idPaciente, idEjercicio]
+      );
+
+      idRealizar = result.insertId;
+    }
+
+    // Marcar como completada solo una asignación pendiente de ese ejercicio
+    await pool.execute(
+      `UPDATE asignacion
+       SET completado = 1
+       WHERE fk_paciente = ?
+         AND fk_idEjercicio = ?
+         AND completado = 0
+       ORDER BY id_asignacion ASC
+       LIMIT 1`,
+      [idPaciente, idEjercicio]
+    );
+
+    return res.status(200).json({
+      message: "Progreso guardado correctamente",
+      idRealizar,
+    });
+  } catch (error) {
+    console.error("Error en guardarProgreso:", error);
+    return res.status(500).json({
+      message: "Error al guardar progreso",
+      error: error.message,
+    });
+  }
+};
+
+
+
+module.exports = {
+  getPacientes,
+  getPacienteById,
+  updatePaciente,
+  deletePaciente,
+  guardarProgreso,
+  getProgresoDia,
+  getEjerciciosAsignados,
+  getHistorialMensual,
+  subirFonetico,
+  subirOrofacial,
 };

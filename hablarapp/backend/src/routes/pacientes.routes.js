@@ -6,6 +6,11 @@ const {
 } = require("../middlewares/auth");
 
 const {
+  uploadFonetico,
+  uploadOrofacial,
+} = require("../middlewares/upload");
+
+const {
   getPacientes,
   getPacienteById,
   updatePaciente,
@@ -14,14 +19,20 @@ const {
   getProgresoDia,
   getEjerciciosAsignados,
   getHistorialMensual,
+  subirFonetico,
+  subirOrofacial,
 } = require("../controllers/pacientes.controller");
 
 // --- RUTAS DE PACIENTES ---
 router.get("/", auth, requireTerapeuta, getPacientes);
+
 router.post("/guardar-progreso", auth, guardarProgreso);
+router.post("/subir-fonetico", auth, uploadFonetico.single("audio"), subirFonetico);
+router.post("/subir-orofacial", auth, uploadOrofacial.single("imagen"), subirOrofacial);
 
 router.get("/:id/asignados", auth, getEjerciciosAsignados);
 router.get("/:id/progreso-dia", auth, getProgresoDia);
+
 router.get(
   "/progreso/historial/:id/:mes/:anio",
   auth,

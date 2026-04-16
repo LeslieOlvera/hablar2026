@@ -96,56 +96,113 @@ async function loginTerapeuta(req, res) {
 
 
 async function sendCodeTerapeuta(req, res) {
-    try {
-        const { correoT } = req.body;
-        
-        // Verificamos si el terapeuta existe
-        const [rows] = await pool.execute("SELECT idCedula FROM Terapeuta WHERE correoT = ?", [correoT]);
-        
-        if (rows.length === 0) {
-            return res.status(404).json({ message: "El correo no está registrado como terapeuta." });
-        }
+  try {
+    const correoT = (req.body.correoT || "").trim().toLowerCase();
 
-        const code = Math.floor(100000 + Math.random() * 900000).toString();
-        codesCache[correoT] = code;
-
-        console.log(`\n📧 [RECUPERACIÓN TERAPEUTA] Código para ${correoT}: ${code}\n`);
-
-        return res.json({ success: true, message: "Código generado con éxito." });
-    } catch (err) {
-        return res.status(500).json({ message: "Error interno del servidor." });
+    if (!correoT) {
+      return res.status(400).json({ message: "El correoT es obligatorio." });
     }
+
+    const [rows] = await pool.execute(
+      "SELECT idCedula, correoT FROM Terapeuta WHERE LOWER(TRIM(correoT)) = ? LIMIT 1",
+      [correoT]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "El correo no está registrado como terapeuta." });
+    }
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+
+    codesCache[correoT] = code;
+
+    console.log(`\n📧 [RECUPERACIÓN TERAPEUTA] Código para ${correoT}: ${code}\n`);
+
+    return res.json({
+      success: true,
+      message: "Código generado con éxito."
+    });
+  } catch (err) {
+    console.error("ERROR sendCodeTerapeuta:", err);
+    return res.status(500).json({
+      message: "Error interno del servidor.",
+      error: err.message
+    });
+  }
 }
 
 async function verifyCodeTerapeuta(req, res) {
-    const { correoT, code } = req.body;
-    
-    if (codesCache[correoT] && codesCache[correoT] === code) {
-        return res.json({ success: true, message: "Código verificado correctamente." });
-    } else {
-        return res.status(400).json({ message: "Código incorrecto o expirado." });
+  try {
+    const correoT = (req.body.correoT || "").trim().toLowerCase();
+    const code = (req.body.code || "").trim();
+
+    if (!correoT || !code) {
+      return res.status(400).json({ message: "correoT y code son obligatorios." });
     }
+
+    if (codesCache[correoT] && codesCache[correoT] === code) {
+      return res.json({
+        success: true,
+        message: "Código verificado correctamente."
+      });
+    }
+
+    return res.status(400).json({
+      message: "Código incorrecto o expirado."
+    });
+  } catch (err) {
+    console.error("ERROR verifyCodeTerapeuta:", err);
+    return res.status(500).json({
+      message: "Error interno del servidor.",
+      error: err.message
+    });
+  }
 }
 
 async function resetPasswordTerapeuta(req, res) {
-    try {
-        const { correoT, code, nuevaContrasena } = req.body;
+  try {
+    const correoT = (req.body.correoT || "").trim().toLowerCase();
+    const code = (req.body.code || "").trim();
+    const nuevaContrasena = req.body.nuevaContrasena || "";
 
-        if (codesCache[correoT] !== code) {
-            return res.status(401).json({ message: "Sesión de recuperación inválida." });
-        }
-
-        const hash = await bcrypt.hash(nuevaContrasena, 10);
-        
-        // Actualizamos la contraseña usando el correo como referencia
-        await pool.execute("UPDATE Terapeuta SET contrasenaT = ? WHERE correoT = ?", [hash, correoT]);
-
-        delete codesCache[correoT];
-
-        return res.json({ success: true, message: "Contraseña actualizada." });
-    } catch (err) {
-        return res.status(500).json({ message: "Error al actualizar contraseña." });
+    if (!correoT || !code || !nuevaContrasena) {
+      return res.status(400).json({
+        message: "correoT, code y nuevaContrasena son obligatorios."
+      });
     }
+
+    if (codesCache[correoT] !== code) {
+      return res.status(401).json({
+        message: "Sesión de recuperación inválida."
+      });
+    }
+
+    const hash = await bcrypt.hash(nuevaContrasena, 10);
+
+    const [result] = await pool.execute(
+      "UPDATE Terapeuta SET contrasenaT = ? WHERE LOWER(TRIM(correoT)) = ?",
+      [hash, correoT]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        message: "No se encontró el terapeuta para actualizar la contraseña."
+      });
+    }
+
+    delete codesCache[correoT];
+
+    return res.json({
+      success: true,
+      message: "Contraseña actualizada."
+    });
+  } catch (err) {
+    console.error("ERROR resetPasswordTerapeuta:", err);
+    return res.status(500).json({
+      message: "Error al actualizar contraseña.",
+      error: err.message
+    });
+  }
 }
 
 module.exports = { 

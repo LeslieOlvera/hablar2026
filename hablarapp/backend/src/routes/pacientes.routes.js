@@ -7,7 +7,7 @@ const {
     getPacientes, getPacienteById, updatePaciente, deletePaciente,
     guardarProgreso, getProgresoDia, getEjerciciosAsignados,
     subirOrofacial, subirFonetico,
-    getHistorialMensual // <--- 1. Agregado aquí
+    getHistorialMensual 
 } = require("../controllers/pacientes.controller");
 
 // Crear carpetas si no existen
@@ -33,15 +33,10 @@ router.post("/guardar-progreso", auth, guardarProgreso);
 router.get("/:id/asignados", auth, getEjerciciosAsignados);
 router.get("/:id/progreso-dia", auth, getProgresoDia);
 
-
 router.get("/progreso/historial/:id/:mes/:anio", auth, allowTerapeutaOrSelfPaciente, getHistorialMensual);
 
 router.get("/:id", auth, allowTerapeutaOrSelfPaciente, getPacienteById);
 router.put("/:id", auth, allowTerapeutaOrSelfPaciente, updatePaciente);
 router.delete("/:id", auth, requireTerapeuta, deletePaciente);
-
-// Rutas de subida
-router.post("/subir-orofacial", auth, upload.single('foto'), subirOrofacial);
-router.post("/subir-fonetico", auth, upload.single('audio'), subirFonetico);
 
 module.exports = router;

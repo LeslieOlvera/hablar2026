@@ -2,12 +2,11 @@ const mysql = require("mysql2/promise");
 
 
 
-const DB_HOST = "hablar-d.cojbkorabely.us-east-1.rds.amazonaws.com";
+const DB_HOST = "192.168.0.175";
 const DB_PORT = 3306;
-const DB_USER = "admin";
+const DB_USER = "root";
 const DB_PASS = "maria123?";
-const DB_NAME = "app_tshusuarios"; 
-
+const DB_NAME = "app_tshusuarios";
 
 const pool = mysql.createPool({
   host: DB_HOST,

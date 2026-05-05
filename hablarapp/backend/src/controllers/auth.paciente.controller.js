@@ -23,7 +23,7 @@ async function signupPaciente(req, res) {
     const hash = await bcrypt.hash(contrasenaP, 10);
 
     const sql = `
-      INSERT INTO Paciente (nombreP, correoP, contrasenaP, estrella, fk_idCedula)
+      INSERT INTO paciente (nombreP, correoP, contrasenaP, estrella, fk_idCedula)
       VALUES (?, ?, ?, ?, ?)
     `;
 
@@ -74,8 +74,8 @@ async function loginPaciente(req, res) {
         p.estrella, 
         p.fk_idCedula,
         t.nombreT 
-      FROM Paciente p
-      INNER JOIN Terapeuta t ON p.fk_idCedula = t.idCedula
+      FROM paciente p
+      INNER JOIN terapeuta t ON p.fk_idCedula = t.idCedula
       WHERE p.correoP = ? 
       LIMIT 1
     `;

@@ -13,7 +13,7 @@ const asignarEjercicios = async (req, res) => {
         for (const asignacion of asignaciones) {
           
             await pool.execute(
-                "INSERT INTO Asignacion (fecha, fk_terapeutaA, fk_paciente, fk_idEjercicio) VALUES (?, ?, ?, ?)",
+                "INSERT INTO asignacion (fecha, fk_terapeutaA, fk_paciente, fk_idEjercicio) VALUES (?, ?, ?, ?)",
                 [
                     asignacion.fecha, 
                     asignacion.fk_terapeutaA, 

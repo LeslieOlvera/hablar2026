@@ -26,7 +26,7 @@ async function signupTerapeuta(req, res) {
 
     // 3. SQL: Incluimos idCedula en el INSERT
     const sql = `
-      INSERT INTO Terapeuta (idCedula, nombreT, correoT, contrasenaT)
+      INSERT INTO terapeuta (idCedula, nombreT, correoT, contrasenaT)
       VALUES (?, ?, ?, ?)
     `;
 

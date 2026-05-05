@@ -62,7 +62,7 @@ async function loginTerapeuta(req, res) {
     }
 
     const [rows] = await pool.execute(
-      "SELECT idCedula, nombreT, correoT, contrasenaT FROM Terapeuta WHERE correoT = ? LIMIT 1",
+      "SELECT idCedula, nombreT, correoT, contrasenaT FROM terapeuta WHERE correoT = ? LIMIT 1",
       [correoT]
     );
 

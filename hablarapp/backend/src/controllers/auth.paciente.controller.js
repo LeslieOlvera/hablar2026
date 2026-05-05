@@ -4,7 +4,7 @@ const { pool } = require("../db");
 const { JWT_SECRET } = require("../middlewares/auth");
 
 // Objeto para guardar códigos temporalmente en memoria
-const codesCache = {}; 
+const codesCache = {};
 
 function signToken(payload) {
   return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
@@ -15,8 +15,8 @@ async function signupPaciente(req, res) {
     const { nombreP, correoP, contrasenaP, estrella, fk_idCedula } = req.body;
 
     if (!nombreP || !correoP || !contrasenaP || !fk_idCedula) {
-      return res.status(400).json({ 
-        message: "Faltan campos: nombreP, correoP, contrasenaP o fk_idCedula" 
+      return res.status(400).json({
+        message: "Faltan campos: nombreP, correoP, contrasenaP o fk_idCedula"
       });
     }
 
@@ -28,31 +28,31 @@ async function signupPaciente(req, res) {
     `;
 
     const [result] = await pool.execute(sql, [
-      nombreP, 
-      correoP, 
-      hash, 
-      estrella || 0, 
+      nombreP,
+      correoP,
+      hash,
+      estrella || 0,
       fk_idCedula
     ]);
 
-    return res.status(201).json({ 
-      message: "Paciente registrado", 
-      id_paciente: result.insertId 
+    return res.status(201).json({
+      message: "Paciente registrado",
+      id_paciente: result.insertId
     });
 
   } catch (err) {
     console.error("ERROR EN REGISTRO PACIENTE:", err);
 
     if (err.code === "ER_NO_REFERENCED_ROW_2") {
-      return res.status(400).json({ 
-        message: "La cédula del terapeuta no existe. Registra al terapeuta primero." 
+      return res.status(400).json({
+        message: "La cédula del terapeuta no existe. Registra al terapeuta primero."
       });
     }
 
     if (err.code === "ER_DUP_ENTRY") {
       return res.status(409).json({ message: "El correoP ya existe" });
     }
-    
+
     return res.status(500).json({ error: err.code, message: err.message });
   }
 }
@@ -66,17 +66,17 @@ async function loginPaciente(req, res) {
     }
 
     const sql = `
-      SELECT 
-        p.id_paciente, 
-        p.nombreP, 
-        p.correoP, 
-        p.contrasenaP, 
-        p.estrella, 
+      SELECT
+        p.id_paciente,
+        p.nombreP,
+        p.correoP,
+        p.contrasenaP,
+        p.estrella,
         p.fk_idCedula,
-        t.nombreT 
+        t.nombreT
       FROM paciente p
       INNER JOIN terapeuta t ON p.fk_idCedula = t.idCedula
-      WHERE p.correoP = ? 
+      WHERE p.correoP = ?
       LIMIT 1
     `;
 
@@ -88,11 +88,11 @@ async function loginPaciente(req, res) {
     const ok = await bcrypt.compare(contrasenaP, paciente.contrasenaP);
     if (!ok) return res.status(401).json({ message: "Credenciales invalidas" });
 
-    const token = signToken({ 
-        role: "paciente", 
-        id: paciente.id_paciente, 
-        correo: paciente.correoP,
-        terapeuta: paciente.fk_idCedula 
+    const token = signToken({
+      role: "paciente",
+      id: paciente.id_paciente,
+      correo: paciente.correoP,
+      terapeuta: paciente.fk_idCedula
     });
 
     return res.json({
@@ -105,7 +105,7 @@ async function loginPaciente(req, res) {
         correoP: paciente.correoP,
         estrella: paciente.estrella,
         fk_idCedula: paciente.fk_idCedula,
-        nombreT: paciente.nombreT 
+        nombreT: paciente.nombreT
       },
     });
   } catch (err) {
@@ -117,57 +117,57 @@ async function loginPaciente(req, res) {
 // --- NUEVAS FUNCIONES DE RECUPERACIÓN ---
 
 async function sendCodePaciente(req, res) {
-    try {
-        const { correoP } = req.body;
-        const [rows] = await pool.execute("SELECT id_paciente FROM Paciente WHERE correoP = ?", [correoP]);
-        
-        if (rows.length === 0) {
-            return res.status(404).json({ message: "El correo no está registrado como paciente." });
-        }
+  try {
+    const { correoP } = req.body;
+    const [rows] = await pool.execute("SELECT id_paciente FROM paciente WHERE correoP = ?", [correoP]);
 
-        const code = Math.floor(100000 + Math.random() * 900000).toString();
-        codesCache[correoP] = code;
-
-        console.log(`\n📧 [RECUPERACIÓN] Código para ${correoP}: ${code}\n`);
-
-        return res.json({ success: true, message: "Código generado con éxito." });
-    } catch (err) {
-        return res.status(500).json({ message: "Error interno del servidor." });
+    if (rows.length === 0) {
+      return res.status(404).json({ message: "El correo no está registrado como paciente." });
     }
+
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
+    codesCache[correoP] = code;
+
+    console.log(`\n📧 [RECUPERACIÓN] Código para ${correoP}: ${code}\n`);
+
+    return res.json({ success: true, message: "Código generado con éxito." });
+  } catch (err) {
+    return res.status(500).json({ message: "Error interno del servidor." });
+  }
 }
 
 async function verifyCodePaciente(req, res) {
-    const { correoP, code } = req.body;
-    if (codesCache[correoP] && codesCache[correoP] === code) {
-        return res.json({ success: true, message: "Código verificado correctamente." });
-    } else {
-        return res.status(400).json({ message: "Código incorrecto o expirado." });
-    }
+  const { correoP, code } = req.body;
+  if (codesCache[correoP] && codesCache[correoP] === code) {
+    return res.json({ success: true, message: "Código verificado correctamente." });
+  } else {
+    return res.status(400).json({ message: "Código incorrecto o expirado." });
+  }
 }
 
 async function resetPasswordPaciente(req, res) {
-    try {
-        const { correoP, code, nuevaContrasena } = req.body;
+  try {
+    const { correoP, code, nuevaContrasena } = req.body;
 
-        if (codesCache[correoP] !== code) {
-            return res.status(401).json({ message: "Sesión de recuperación inválida." });
-        }
-
-        const hash = await bcrypt.hash(nuevaContrasena, 10);
-        await pool.execute("UPDATE Paciente SET contrasenaP = ? WHERE correoP = ?", [hash, correoP]);
-
-        delete codesCache[correoP];
-
-        return res.json({ success: true, message: "Contraseña actualizada." });
-    } catch (err) {
-        return res.status(500).json({ message: "Error al actualizar contraseña." });
+    if (codesCache[correoP] !== code) {
+      return res.status(401).json({ message: "Sesión de recuperación inválida." });
     }
+
+    const hash = await bcrypt.hash(nuevaContrasena, 10);
+    await pool.execute("UPDATE paciente SET contrasenaP = ? WHERE correoP = ?", [hash, correoP]);
+
+    delete codesCache[correoP];
+
+    return res.json({ success: true, message: "Contraseña actualizada." });
+  } catch (err) {
+    return res.status(500).json({ message: "Error al actualizar contraseña." });
+  }
 }
 
-module.exports = { 
-    signupPaciente, 
-    loginPaciente, 
-    sendCodePaciente, 
-    verifyCodePaciente, 
-    resetPasswordPaciente 
+module.exports = {
+  signupPaciente,
+  loginPaciente,
+  sendCodePaciente,
+  verifyCodePaciente,
+  resetPasswordPaciente
 };

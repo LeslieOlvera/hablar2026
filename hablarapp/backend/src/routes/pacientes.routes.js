@@ -45,7 +45,8 @@ const storageOrofacial = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname) || ".jpg";
-    cb(null, `oro_${Date.now()}${ext}`);
+    const unique = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
+    cb(null, `oro_${unique}${ext}`);
   },
 });
 
@@ -55,7 +56,8 @@ const storageFonetico = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname) || ".m4a";
-    cb(null, `fon_${Date.now()}${ext}`);
+    const unique = `${Date.now()}_${Math.round(Math.random() * 1e9)}`;
+    cb(null, `fon_${unique}${ext}`);
   },
 });
 

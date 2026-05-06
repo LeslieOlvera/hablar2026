@@ -1,5 +1,10 @@
+
 node_modules/
 .env
 .vscode/
 dist/
 build/
+
+*.pem
+uploads/
+src/uploads/

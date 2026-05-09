@@ -14,6 +14,26 @@ function calcularEstrellas(porcentaje) {
   return 0;
 }
 
+/**
+ * Convierte la ruta física del archivo en una URL relativa pública.
+ *
+ * Ejemplo:
+ * rutaFisica:
+ * /home/ubuntu/apps/hablar2026/hablarapp/backend/src/uploads/orofaciales/paciente_2/oro_123.png
+ *
+ * archivoUrl:
+ * /uploads/orofaciales/paciente_2/oro_123.png
+ */
+function construirArchivoUrl(rutaArchivo) {
+  const srcRoot = path.join(__dirname, "..");
+
+  const rutaRelativa = path
+    .relative(srcRoot, rutaArchivo)
+    .replace(/\\/g, "/");
+
+  return `/${rutaRelativa}`;
+}
+
 // ======================================================
 // OBTENER PROGRESO DE UN DÍA ESPECÍFICO
 // ======================================================
@@ -287,8 +307,8 @@ const subirFonetico = async (req, res) => {
       });
     }
 
-    const archivoUrl = `/uploads/foneticos/${req.file.filename}`;
     const rutaFisica = path.resolve(req.file.path);
+    const archivoUrl = construirArchivoUrl(rutaFisica);
 
     console.log("=====================================");
     console.log("AUDIO FONÉTICO RECIBIDO");
@@ -342,7 +362,7 @@ const subirFonetico = async (req, res) => {
     const idRealizar = result.insertId;
 
     return res.status(201).json({
-      message: "Audio guardado correctamente",
+      message: "Audio guardado correctamente y listo para clasificar",
       archivoUrl,
       rutaFisica,
       idRealizar,
@@ -388,8 +408,8 @@ const subirOrofacial = async (req, res) => {
       });
     }
 
-    const archivoUrl = `/uploads/orofaciales/${req.file.filename}`;
     const rutaFisica = path.resolve(req.file.path);
+    const archivoUrl = construirArchivoUrl(rutaFisica);
 
     console.log("=====================================");
     console.log("IMAGEN OROFACIAL RECIBIDA");
@@ -443,7 +463,7 @@ const subirOrofacial = async (req, res) => {
     const idRealizar = result.insertId;
 
     return res.status(201).json({
-      message: "Imagen guardada correctamente",
+      message: "Imagen guardada correctamente y lista para clasificar",
       archivoUrl,
       rutaFisica,
       idRealizar,

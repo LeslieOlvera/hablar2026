@@ -1,1 +1,144 @@
 
+# ============================================================
+# 1. FUNCIONES DE AUMENTO DE DATOS (DATA AUGMENTATION)
+# ============================================================
+
+def agregar_ruido(audio, factor_ruido=0.005):
+    """Inyecta ruido blanco aleatorio."""
+    ruido = np.random.normal(0, factor_ruido, len(audio))
+    return audio + ruido
+
+def cambiar_velocidad(audio):
+    """Cambia la velocidad sin alterar el tono."""
+    factor = np.random.uniform(0.85, 1.15)
+    return librosa.effects.time_stretch(y=audio, rate=factor)
+
+def cambiar_tono(audio, sr=SR):
+    """Modifica el tono (pitch) sin alterar la velocidad."""
+    pasos = np.random.uniform(-2.0, 2.0)
+    return librosa.effects.pitch_shift(y=audio, sr=sr, n_steps=pasos)
+
+def aplicar_spec_augment(mel_db, num_f_masks=1, num_t_masks=1, f_width=8, t_width=12):
+    """SpecAugment: Bloquea bandas de frecuencia y tiempo en el espectrograma."""
+    mel_aug = mel_db.copy()
+    num_frecuencias, num_frames = mel_aug.shape
+
+    # Máscaras de Frecuencia (Líneas horizontales)
+    for _ in range(num_f_masks):
+        f = np.random.randint(0, num_frecuencias - f_width)
+        mel_aug[f:f + f_width, :] = np.mean(mel_aug)
+
+    # Máscaras de Tiempo (Líneas verticales)
+    for _ in range(num_t_masks):
+        t = np.random.randint(0, num_frames - t_width)
+        mel_aug[:, t:t + t_width] = np.mean(mel_aug)
+
+    return mel_aug
+
+# ============================================================
+# 2. FUNCIÓN MAESTRA DE CARGA Y NORMALIZACIÓN
+# ============================================================
+
+def cargar_y_procesar_audio(ruta_audio, sr=SR, n_samples=N_SAMPLES, tipo_aug=None):
+    """Carga, filtra, aplica VAD y una técnica de aumento específica o ninguna."""
+    try:
+        audio, _ = librosa.load(ruta_audio, sr=sr, mono=True)
+    except Exception as e:
+        raise IOError(f"Error al leer {ruta_audio}: {e}")
+
+    # Procesamiento base idéntico para todos
+    audio = filtro_pasa_banda(audio, sr=sr)
+    audio = aplicar_vad(audio, sr=sr)
+
+    # Aplicar la técnica correspondiente según el bucle de entrenamiento
+    if tipo_aug == 'ruido':
+        audio = agregar_ruido(audio)
+    elif tipo_aug == 'velocidad':
+        audio = cambiar_velocidad(audio)
+    elif tipo_aug == 'tono':
+        audio = cambiar_tono(audio, sr=sr)
+
+    # Normalizar amplitud máxima
+    if np.max(np.abs(audio)) > 0:
+        audio = audio / np.max(np.abs(audio))
+
+    # Ajustar a tamaño fijo
+    if len(audio) > n_samples:
+        audio = audio[:n_samples]
+    else:
+        audio = np.pad(audio, (0, n_samples - len(audio)), mode="constant")
+
+    return audio
+
+def audio_a_mel(audio):
+    """Transforma el audio limpio en un Mel-Espectrograma."""
+    mel = librosa.feature.melspectrogram(
+        y=audio, sr=SR, n_fft=N_FFT, hop_length=HOP_LENGTH, n_mels=N_MELS
+    )
+    mel_db = librosa.power_to_db(mel, ref=np.max)
+    mel_db = (mel_db - np.mean(mel_db)) / (np.std(mel_db) + 1e-8)
+    return mel_db
+
+# ============================================================
+# 3. CARGA DEL DATASET CON AUMENTO MASIVO MULTI-TÉCNICA
+# ============================================================
+
+X = []
+y = []
+extensiones_validas = [".wav", ".mp3", ".m4a", ".ogg", ".flac"]
+
+print("Cargando, filtrando y multiplicando el dataset mediante Data Augmentation...")
+
+for nombre_clase, etiqueta in CLASES.items():
+    carpeta = os.path.join(DATASET_PATH, nombre_clase)
+    if not os.path.exists(carpeta):
+        print(f"Advertencia: No existe la carpeta {carpeta}")
+        continue
+
+    archivos = [f for f in os.listdir(carpeta) if any(f.lower().endswith(ext) for ext in extensiones_validas)]
+
+    for archivo in archivos:
+        ruta = os.path.join(carpeta, archivo)
+        try:
+            # 1. Muestra Original Limpia
+            audio_orig = cargar_y_procesar_audio(ruta, tipo_aug=None)
+            mel_orig = audio_a_mel(audio_orig)
+            X.append(mel_orig)
+            y.append(etiqueta)
+
+            # 2. Variante con Ruido Blanco
+            audio_ruido = cargar_y_procesar_audio(ruta, tipo_aug='ruido')
+            mel_ruido = audio_a_mel(audio_ruido)
+            X.append(mel_ruido)
+            y.append(etiqueta)
+
+            # 3. Variante con Alteración de Velocidad
+            audio_vel = cargar_y_procesar_audio(ruta, tipo_aug='velocidad')
+            mel_vel = audio_a_mel(audio_vel)
+            X.append(mel_vel)
+            y.append(etiqueta)
+
+            # 4. Variante con Alteración de Tono (Pitch)
+            audio_tono = cargar_y_procesar_audio(ruta, tipo_aug='tono')
+            mel_tono = audio_a_mel(audio_tono)
+            X.append(mel_tono)
+            y.append(etiqueta)
+
+            # 5. Variante con SpecAugment (basada en el audio original)
+            mel_spec_aug = aplicar_spec_augment(mel_orig)
+            X.append(mel_spec_aug)
+            y.append(etiqueta)
+
+        except Exception as e:
+            print(f"Error procesando {archivo}: {e}")
+
+X = np.array(X)
+y = np.array(y)
+
+print(f"\n¡Dataset Expandido con éxito!: {X.shape[0]} muestras en total.")
+print(f"Clase MAL (0): {np.sum(y == 0)} | Clase BIEN (1): {np.sum(y == 1)}")
+
+if len(X) == 0:
+    raise ValueError("Cero audios procesados. Verifica tus rutas en Drive.")
+
+X = X[..., np.newaxis]
